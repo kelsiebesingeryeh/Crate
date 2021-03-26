@@ -12,6 +12,8 @@ import { NODE_ENV } from '../config/env'
 // Load express modules
 export default function (server) {
   console.info('SETUP - Loading modules...')
+// the function 
+
 
   // Enable CORS
   server.use(cors())
