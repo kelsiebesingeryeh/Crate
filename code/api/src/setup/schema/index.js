@@ -1,3 +1,5 @@
+// imports the queries and mutations that users are allowed to request from the GraphQL endpoint
+
 // Imports
 import { GraphQLSchema } from 'graphql'
 
