@@ -55,3 +55,13 @@ export const crateRemove = {
   },
   resolve: remove
 }
+
+ // model.js in ruby this would go under the Models folder 
+// the mutations and query.js would live under a graphql folder in ruby... 
+// the mutations and query serves like the crud functonality in ruby. 
+// mutations is the CUD in CRUD 
+// mutations means to alter and change 
+// query is what you read
+// this would be everything but a get erquest 
+
+

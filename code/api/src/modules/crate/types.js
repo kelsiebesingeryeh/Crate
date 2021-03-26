@@ -6,6 +6,7 @@ const CrateType = new GraphQLObjectType({
   name: 'crate',
   description: 'Crate Type',
 
+  // below is what we can query for api 
   fields: () => ({
     id: { type: GraphQLInt },
     name: { type: GraphQLString },

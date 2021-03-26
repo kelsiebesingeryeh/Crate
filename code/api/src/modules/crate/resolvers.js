@@ -54,3 +54,9 @@ export async function remove(parentValue, { id }, { auth }) {
     throw new Error('Operation denied.')
   }
 }
+
+
+// we will also be adding to the resolvers folder. 
+// Resolvers are per field functions and are given a parent object, arguments, and execution context. 
+// They are responsible for returning a result for that field. 
+

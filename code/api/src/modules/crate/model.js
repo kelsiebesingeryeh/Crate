@@ -16,3 +16,8 @@ module.exports = function(sequelize, DataTypes) {
 
   return Crate
 }
+
+// modules contains the four tables 
+// if a new table needs to be created we will need to create a new table folder. 
+// each table has its own folders 
+
