@@ -45,6 +45,7 @@ const Home = (props) => (
         </H4>
 
         {/* Call to action */}
+        {/* If the user is authenticated then it will show the "Get Subscription" button and take you to the page of all the available crates */}
         {
           props.user.isAuthenticated
             ? <Link to={crateRoutes.list.path}>
