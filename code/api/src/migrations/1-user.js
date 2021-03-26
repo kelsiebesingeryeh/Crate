@@ -33,3 +33,5 @@ module.exports = {
     return queryInterface.dropTable('users');
   }
 }
+// creating the tables with their attributes 
+// establishes th relationships if there are any 
