@@ -16,6 +16,9 @@ export default function (request, response, next) {
   } else {
     request.user = {}
   }
+// Guesstimate: FE stores the login info and BE doesnt need to store 
+//  it just needs to be able to verify the user 
+
 
   next()
 }
