@@ -59,4 +59,5 @@ export async function remove(parentValue, { id }, { auth }) {
 // we will also be adding to the resolvers folder. 
 // Resolvers are per field functions and are given a parent object, arguments, and execution context. 
 // They are responsible for returning a result for that field. 
-
+// looking at from a rails pov this would be similar to a controller conditional stetment... here goes our 
+// happy and sad path 
