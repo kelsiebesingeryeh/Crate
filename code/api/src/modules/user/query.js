@@ -1,8 +1,11 @@
 // Imports
+  // imports GraphQL scalar types that we will use to specify the data types of our fields
 import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql'
 
 // App Imports
+  // imports the types defined in types.js; this us used to tell operations what kind of object w/ which fields to return in the HTTP response
 import { UserType, UserLoginType, UserGenderType } from './types'
+  // imports the resolver functions that should be executed when the query types below are called
 import { getAll, getById, login, getGenders } from './resolvers'
 
 // All

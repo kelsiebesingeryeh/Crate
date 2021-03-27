@@ -2,6 +2,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql'
 
 // User type
+  // models a resource from the users table
 const UserType = new GraphQLObjectType({
   name: 'user',
   description: 'User type',
@@ -18,6 +19,7 @@ const UserType = new GraphQLObjectType({
 })
 
 // User Login type
+  // creates an object containing a user as well as an authentication token, allowing the app to authenticate requests for resources related to a particular user
 const UserLoginType = new GraphQLObjectType({
   name: 'userAuth',
   description: 'User Authentication Type',
@@ -29,6 +31,8 @@ const UserLoginType = new GraphQLObjectType({
 })
 
 // User Gender type
+  // returns the id and name of each enumerated value for user gender
+  // users don't actually have a gender in this app, but gender is used to organize products; we might replace this type with a ProductGenderType in ../products/types.js
 const UserGenderType = new GraphQLObjectType({
   name: 'userGender',
   description: 'User Gender Type',

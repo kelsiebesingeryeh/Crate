@@ -1,3 +1,5 @@
+// this file seeds the database with product data
+// products will need an associated style, so we will need to add that attribute here and re-seed the database after adding that column to the database
 'use strict';
 
 const params = require('../config/params');
