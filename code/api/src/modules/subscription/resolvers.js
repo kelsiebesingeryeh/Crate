@@ -1,4 +1,5 @@
 // App Imports
+  // imports the database connection that can be queried using Sequelize
 import models from '../../setup/models'
 
 // Get subscription by ID
@@ -40,6 +41,7 @@ export async function getAll() {
 }
 
 // Create subscription
+  // we will need to add a field for the style string to this function
 export async function create(parentValue, { crateId }, { auth }) {
   if(auth.user && auth.user.id > 0) {
     return await models.Subscription.create({

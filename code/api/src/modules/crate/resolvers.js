@@ -1,5 +1,7 @@
 // App Imports
+  // imports the database connection that can be queried using Sequelize
 import models from '../../setup/models'
+  // imports the enumerated values for product types and user roles & genders
 import params from '../../config/params'
 
 // Get crate by ID

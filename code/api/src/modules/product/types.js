@@ -1,5 +1,6 @@
-// types allow us to model the data in our database as objects and are used to map the database columns for those tables to properties of objects
-// GraphQL types also allow us to define sub-types of our database resources that might have different properties from the database resources. The ProductTypesType, for example, contains meta-information about a product in that it contains the id and descrption of enumerated product types. The UserLoginType has a token, which is not a column on the users table but which is needed as a user property in order to process certain requests
+  // types allow us to model the data in our database as objects and are used to map the database columns for those tables to properties of objects
+  // GraphQL types also allow us to define sub-types of our database resources that might have different properties from the database resources. The ProductTypesType, for example, contains meta-information about a product in that it contains the id and descrption of enumerated product types. The UserLoginType has a token, which is not a column on the users table but which is needed as a user property in order to process certain requests. Types are rad.
+
 // Imports
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql'
 

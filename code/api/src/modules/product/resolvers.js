@@ -1,5 +1,9 @@
+// we will need to either modify the relatedProducts function or add a new function to get products of a given type and gender in order to populate the style survey on the front end
+
 // App Imports
+  // imports the enumerated values for product types and user roles & genders
 import params from '../../config/params'
+  // imports the database connection that can be queried using Sequelize
 import models from '../../setup/models'
 
 // Get all products
@@ -8,13 +12,16 @@ export async function getAll() {
 }
 
 // Get product by slug
+  // defines the resolver function to be executed when called by an operation in query.js or mutations.js
 export async function getBySlug(parentValue, { slug }) {
+  // gets info on a product from the database using the Sequelize connection and syntax
   const product = await models.Product.findOne({ where: { slug } })
-
   if (!product) {
     // Product does not exists
+    // if Sequelize can't find a product matching the provided slug it returns this error object, which is then serialized & returned in an errors object in the json response (express/node seems to do this work under the hood)
     throw new Error('The product you are looking for does not exists or has been discontinued.')
   } else {
+    // if Sequelize find the product the function returns the product data, which is serialized as the type specified in the query operation
     return product
   }
 }
@@ -38,6 +45,7 @@ export async function getRelated(parentValue, { productId }) {
       id: { [models.Sequelize.Op.not]: productId }
     },
     limit: 3,
+    // this is silly
     order: [[models.Sequelize.fn('RAND')]] // mock related products by showing random products
   })
 }

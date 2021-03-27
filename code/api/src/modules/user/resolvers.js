@@ -3,8 +3,11 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 // App Imports
+
 import serverConfig from '../../config/server'
+  // imports the enumerated values for product types and user roles & genders
 import params from '../../config/params'
+  // imports the database connection that can be queried using Sequelize
 import models from '../../setup/models'
 
 // Create
