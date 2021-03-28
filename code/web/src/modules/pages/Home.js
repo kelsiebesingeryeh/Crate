@@ -45,6 +45,12 @@ const Home = (props) => (
         </H4>
 
         {/* Call to action */}
+        {/*
+          This code down below shows a button that links to the /crates path
+          /crates is ultimately where the user will start their journey for this feature
+          they can get there from multiple places on the site but this is the fastest
+          This doesn't need to change but it's good to take stock of
+          */}
         {
           props.user.isAuthenticated
             ? <Link to={crateRoutes.list.path}>

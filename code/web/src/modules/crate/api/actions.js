@@ -104,6 +104,10 @@ export function createOrUpdate(crate) {
 }
 
 // Create crate
+//this function may need to change or we may need a helper
+//right now when we call it the only data we send to the backend is an ID
+//if we're gathering survey data that should be included we'll need to send that too
+//
 export function create(variables) {
   return dispatch => {
     return axios.post(routeApi, mutation({

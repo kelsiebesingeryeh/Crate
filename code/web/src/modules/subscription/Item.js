@@ -26,7 +26,8 @@ class Item extends PureComponent {
       isLoading: false
     }
   }
-
+//this function allows a user to unsubscribe from a crate
+//we will almost certianly leave this untouched
   onClickUnsubscribe = (id) => {
     let check = confirm('Are you sure you want to unsubscribe to this crate?')
 
@@ -62,6 +63,10 @@ class Item extends PureComponent {
     }
   }
 
+//this render function creates a card that shows the user a crate they're subscribed to
+//it also adds a button to let them unsubscribe
+//since our group has decided to tie survey results to subscriptions...
+//... instead of an account we may need to display that information here
   render() {
     const { id, crate, createdAt } = this.props.subscription
     const { isLoading } = this.state

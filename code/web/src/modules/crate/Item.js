@@ -20,6 +20,8 @@ import { create } from '../subscription/api/actions'
 // Component
 class Item extends PureComponent {
 
+  //basic constructor function here
+  //we'll inherit some key functions through those props
   constructor(props) {
     super(props)
 
@@ -28,6 +30,12 @@ class Item extends PureComponent {
     }
   }
 
+  //This is the primary function we'll be modifying: our feature starts here
+  //most of the code here can still be used, but we'll need to move it
+  //right now it calls the create function, which sends a mutation to the API
+  //this means it just adds a subscription
+  //instead we should use this function to navigate to our survey
+  //when we submit that survey, the code will look very similar to this
   onClickSubscribe = (crateId) => {
     this.setState({
       isLoading: true
@@ -35,17 +43,26 @@ class Item extends PureComponent {
 
     this.props.messageShow('Subscribing, please wait...')
 
+    //when we DO submit the survey and send a mutation to the backend
+    //we'll want to include the survey results as well as the crateId
     this.props.create({ crateId })
       .then(response => {
         if (response.data.errors && response.data.errors.length > 0) {
           this.props.messageShow(response.data.errors[0].message)
         } else {
+          //the code below displays a success message
+          //and routes the user to /subscriptions
+          //no matter how we reorganize this code we need to make sure to preserve this
+          //this message and re-route is what confirms for the user that they've
+          //added a subscription successfully
           this.props.messageShow('Subscribed successfully.')
 
           this.props.history.push(userRoutes.subscriptions.path)
         }
       })
       .catch(error => {
+        //this message may need to change to indicate that somehting could
+        //go wrong with the survey as well
         this.props.messageShow('There was some error subscribing to this crate. Please try again.')
       })
       .then(() => {
@@ -59,6 +76,7 @@ class Item extends PureComponent {
       })
   }
 
+  //this render function renders one 'crate' card to go in our list
   render() {
     const { id, name, description } = this.props.crate
     const { isLoading } = this.state
@@ -75,6 +93,11 @@ class Item extends PureComponent {
           <p style={{ color: grey2, marginTop: '1em' }}>{description}</p>
 
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
+          {/*
+            this button is what a user will click to open our survey
+            right now it just adds the subscription to their account
+            right away
+          */}
             <Button
               theme="primary"
               onClick={this.onClickSubscribe.bind(this, id)}
