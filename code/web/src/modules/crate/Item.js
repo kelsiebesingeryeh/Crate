@@ -28,6 +28,11 @@ class Item extends PureComponent {
     }
   }
 
+  // this function is run when a user hits the button. It changes the state to loading is true, shows a message that says subscribing, please wait
+  // it then runs an action with an API endpoint that basically creates a subscription. it makes a request and has some error handling whether or not the user successfully subscribed. 
+  // we need to add the survey somewhere in this file when the user clicks on that button.
+  // 
+
   onClickSubscribe = (crateId) => {
     this.setState({
       isLoading: true
@@ -58,6 +63,9 @@ class Item extends PureComponent {
         }, 5000)
       })
   }
+
+  // returning a card component with a button component for styling purposes. When you click on the button, the onClickSubscribe button is ran, which
+  // sets the state to loading is true. 
 
   render() {
     const { id, name, description } = this.props.crate

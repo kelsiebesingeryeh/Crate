@@ -23,10 +23,15 @@ class Subscriptions extends PureComponent {
     return store.dispatch(getListByUser())
   }
 
+  // we are fetching the subscription list for the user to see what they have subscribed to. 
+
   // Runs on client only
   componentDidMount() {
     this.props.getListByUser()
   }
+
+  // we are returning a GRID component containing the subscription cards. if we have subscription, we then map over the subscription list and render the
+  // subscriptionitem component containing which subscriptions we are subscribed to.
 
   render() {
     return (

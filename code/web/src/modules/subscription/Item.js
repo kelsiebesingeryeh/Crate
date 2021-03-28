@@ -66,6 +66,8 @@ class Item extends PureComponent {
     const { id, crate, createdAt } = this.props.subscription
     const { isLoading } = this.state
 
+    //returns a Card with an image, the crate name, description, and a button. There is also functionality to unsubscribe
+    
     return (
       <Card style={{ width: '18em', backgroundColor: white }}>
         <p style={{ padding: '2em 3em 0 3em' }}>

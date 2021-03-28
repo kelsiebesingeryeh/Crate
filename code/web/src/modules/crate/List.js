@@ -47,6 +47,8 @@ class List extends PureComponent {
         </Grid>
 
         {/* Crate list */}
+        {/* This section returns the crate list from props. If the page is not loading, then we map over the crate list from props and renders the Grid component that
+        contains the CrateItem component that are instance of GridCell class component. */}
         <Grid>
           <GridCell>
             {
