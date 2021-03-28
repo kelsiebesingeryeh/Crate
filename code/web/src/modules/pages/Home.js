@@ -45,6 +45,8 @@ const Home = (props) => (
         </H4>
 
         {/* Call to action */}
+        {/* Link take user to list crates
+            crate/List.js */}
         {
           props.user.isAuthenticated
             ? <Link to={crateRoutes.list.path}>

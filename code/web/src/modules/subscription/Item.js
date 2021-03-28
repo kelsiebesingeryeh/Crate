@@ -28,22 +28,28 @@ class Item extends PureComponent {
   }
 
   onClickUnsubscribe = (id) => {
+    // open an alert
     let check = confirm('Are you sure you want to unsubscribe to this crate?')
 
     if(check) {
+      // now it's loading
       this.setState({
         isLoading: true
       })
 
+      // show a message... it's loading
       this.props.messageShow('Subscribing, please wait...')
 
+      // subscription/api/actions.js >>> Line 135
       this.props.remove({id})
+        // pretty much the same as "subscribe" but the opposite
+        // error handling... does this exist?
         .then(response => {
           if (response.data.errors && response.data.errors.length > 0) {
             this.props.messageShow(response.data.errors[0].message)
           } else {
             this.props.messageShow('Unsubscribed successfully.')
-
+            // subscription/api/actions.js >>> Line 58
             this.props.getListByUser()
           }
         })
@@ -78,6 +84,7 @@ class Item extends PureComponent {
           <p style={{ color: grey2, marginTop: '1em' }}>{ crate.description }</p>
 
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
+            {/* remove this subscription from the user's list of subscriptions */}
             <Button
               theme="secondary"
               onClick={this.onClickUnsubscribe.bind(this, id)}

@@ -19,6 +19,8 @@ import SubscriptionItem from '../subscription/Item'
 class Subscriptions extends PureComponent {
 
   // Runs on server only for SSR
+  // fetches the user's list of subscriptions
+  // subscription/api/actions.js >>> Line 58
   static fetchData({ store }) {
     return store.dispatch(getListByUser())
   }
@@ -48,6 +50,8 @@ class Subscriptions extends PureComponent {
         </Grid>
 
         {/* Product list */}
+        {/* If there are any user subscriptions, return a card for each of them */}
+        {/* subscription/Item.js as SubscriptionItem */}
         <Grid>
           <GridCell>
             {

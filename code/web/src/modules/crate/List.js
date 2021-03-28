@@ -52,6 +52,8 @@ class List extends PureComponent {
             {
               this.props.crates.isLoading
                 ? <Loading/>
+                // if page is not loading map over array of crate options as individual cards
+                // this nested conditionally seems messy and could be refactored
                 : this.props.crates.list.length > 0
                     ? this.props.crates.list.map(crate => (
                       <div key={crate.id} style={{ margin: '2em', float: 'left' }}>

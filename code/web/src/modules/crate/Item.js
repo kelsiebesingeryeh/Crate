@@ -29,20 +29,27 @@ class Item extends PureComponent {
   }
 
   onClickSubscribe = (crateId) => {
+    // now it's loading
     this.setState({
       isLoading: true
     })
-
+    // show this message because it's loading
+    // located in common/api/actions.js >>> Line 9
     this.props.messageShow('Subscribing, please wait...')
 
+    // located in subscription/api/actions.js >>> Line 124
+    // performs a POST request
     this.props.create({ crateId })
+        // error handling is done in the following then statements
       .then(response => {
         if (response.data.errors && response.data.errors.length > 0) {
           this.props.messageShow(response.data.errors[0].message)
         } else {
           this.props.messageShow('Subscribed successfully.')
 
+          // if everything goes correctly, it reroutes to the users subscription page
           this.props.history.push(userRoutes.subscriptions.path)
+          // after this will come the survey
         }
       })
       .catch(error => {
@@ -75,6 +82,7 @@ class Item extends PureComponent {
           <p style={{ color: grey2, marginTop: '1em' }}>{description}</p>
 
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
+            {/* main function of this component is to add a subscription to the list of a user's subscription */}
             <Button
               theme="primary"
               onClick={this.onClickSubscribe.bind(this, id)}
