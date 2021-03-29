@@ -9,6 +9,7 @@ import { Grid, GridCell } from '../../ui/grid'
 import { H3 } from "../../ui/typography";
 import  SurveyModal from '../../ui/surveyModal'
 import  Button  from '../../ui/button/Button'
+import Card from "../../ui/card/Card";
 
 class Survey extends PureComponent {
     constructor(props) {
@@ -32,17 +33,21 @@ class Survey extends PureComponent {
     
     render() {
         <SurveyModal>
-        {/* product display */}
+          {/* product display */}
           <Grid>
-              <GridCell>
-                  {/* individual component */}
-                  {/* function that iterates over all products to display clickable images */}
-              </GridCell>
-          </Grid>  
-        <Button theme='secondary' type='button' onClick={this.nextPage}>
+            <GridCell>
+              <Card style={{ width: "30%", backgroundColor: white }}>
+                  <img src={`${ APP_URL }/images/crate.png`} alt={`a box`} style={{ width: '100%' }}/>
+              </Card>
+              {/* individual component */}
+              {/* add onClick on the image. src, alt, style, selected - false by default */}
+              {/* function that iterates over all products to display clickable images */}
+            </GridCell>
+          </Grid>
+          <Button theme="secondary" type="button" onClick={this.nextPage}>
             Next Page
-        </Button>
-        </SurveyModal>
+          </Button>
+        </SurveyModal>;
     }
     // this.props.history.push(userRoutes.survey.path)
 }
