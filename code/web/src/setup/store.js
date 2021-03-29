@@ -12,6 +12,10 @@ import * as subscription from '../modules/subscription/api/state'
 import * as crate from '../modules/crate/api/state'
 
 // App Reducer
+//Something our group has gone back and forth on is how much we'll need to add
+//to the store in order to run our survey.
+//we will likely need a new module and we'll need to include that module'switch
+//reducer in our app reducer
 const appReducer = combineReducers({
   common,
   user,
