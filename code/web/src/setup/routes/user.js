@@ -30,7 +30,7 @@ export default {
   },
 
   survey: {
-    path: '/survey',
+    path: '/user/survey',
     component: Survey,
     auth: true
   }
