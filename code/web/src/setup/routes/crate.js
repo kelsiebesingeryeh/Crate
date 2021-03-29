@@ -11,7 +11,7 @@ export default {
   },
 
   survey: {
-    path: '/crates/${crate-id}-survey',
+    path: '/crates/survey',
     component: Survey,
     auth: true
   }
