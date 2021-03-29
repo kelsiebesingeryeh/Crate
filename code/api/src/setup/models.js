@@ -10,6 +10,9 @@ const models = {
   Crate: databaseConnection.import('../modules/crate/model'),
   Subscription: databaseConnection.import('../modules/subscription/model')
 }
+// if new table is created this is where we will update that. 
+
+
 // const is to save a variable 
 // in js theres four ways to set a variable ie). 
 // const = means variable cant be changed 

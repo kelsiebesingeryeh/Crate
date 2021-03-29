@@ -37,3 +37,4 @@ module.exports = {
     return queryInterface.dropTable('subscriptions');
   }
 }
+//  this file would have the styles 
