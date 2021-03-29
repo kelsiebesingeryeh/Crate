@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+//UI Component
 import { grey, white } from '../common/colors';
 
 //Component
