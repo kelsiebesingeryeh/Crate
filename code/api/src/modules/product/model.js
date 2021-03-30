@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     category: {
       type: DataTypes.INTEGER
     },
-    style_tag: {
+    styleTag: {
       type: DataTypes.INTEGER
     }
   })

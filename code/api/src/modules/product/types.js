@@ -17,7 +17,7 @@ const ProductType = new GraphQLObjectType({
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
     category: { type: GraphQLInt },
-    style_tag: { type: GraphQLInt }
+    styleTag: { type: GraphQLInt }
   })
 })
 
