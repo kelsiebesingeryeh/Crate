@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import userRoutes from "../../setup/routes/user";
+import crateRoutes from "../../setup/routes/crate";
 
 // UI Imports
 import { Grid, GridCell } from '../../ui/grid'
@@ -18,8 +18,8 @@ class Survey extends PureComponent {
            isLoading: false,
            page: 0,
            products: null,
-           results: [],
-           history: null 
+        //    results: [],
+        //    history: null 
         }
     }
 
@@ -34,6 +34,7 @@ class Survey extends PureComponent {
     render() {
         <SurveyModal>
           {/* product display */}
+          <H3 font='secondary'>Style Survey</H3>
           <Grid>
             <GridCell>
               <Card style={{ width: "30%", backgroundColor: white }}>
@@ -49,7 +50,7 @@ class Survey extends PureComponent {
           </Button>
         </SurveyModal>;
     }
-    // this.props.history.push(userRoutes.survey.path)
+    // this.props.history.push(userRoutes.subscriptions.path)
 }
 
 export default Survey
