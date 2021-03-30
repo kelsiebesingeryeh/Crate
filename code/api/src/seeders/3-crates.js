@@ -1,5 +1,7 @@
 'use strict';
 
+const params = require('../config/params');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('crates', [
