@@ -20,6 +20,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     image: {
       type: DataTypes.TEXT
+    },
+    category: {
+      type: DataTypes.INTEGER
+    },
+    styleTag: {
+      type: DataTypes.INTEGER
     }
   })
 }

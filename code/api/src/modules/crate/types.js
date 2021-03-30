@@ -11,7 +11,9 @@ const CrateType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     createdAt: { type: GraphQLString },
-    updatedAt: { type: GraphQLString }
+    updatedAt: { type: GraphQLString },
+    type: { type: GraphQLInt },
+    gender: { type: GraphQLInt }
   })
 })
 
