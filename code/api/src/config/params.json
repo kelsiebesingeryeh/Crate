@@ -48,8 +48,10 @@
       "edgy": {
         "id": 3,
         "name": "Edgy"
-      },
+      }
+    }
   },
+
   "user": {
     "roles": {
       "admin": "ADMIN",
