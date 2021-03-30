@@ -73,14 +73,3 @@ class Survey extends PureComponent {
   
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items - 
-
-  
-  
-  //    results: [],
-  //    history: null 
-
-  // const results = {
-  //   1: [{}, {}, {}, {}, {}, {}],
-  //   2: [{}, {}, {}, {}, {}, {}],
-  //   3: [{}, {}, {}, {}, {}, {}],
-  // };
