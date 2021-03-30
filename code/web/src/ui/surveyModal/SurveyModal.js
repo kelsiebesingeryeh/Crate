@@ -40,6 +40,7 @@ const SurveyModal = (props) => {
                       <Card 
                         key={i}
                         styleTag={item.styleTag}
+                        onClick={()=>{console.log(item.styleTag)}}
                         style={{ 
                           margin: "1%",
                           width: "30%", 

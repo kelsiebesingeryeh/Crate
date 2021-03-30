@@ -36,9 +36,20 @@ class Survey extends PureComponent {
         this.state = {
            isLoading: false,
            page: 1,
-           products: results,
+           products: {
+            1: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
+            2: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
+            3: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
+          },
           }
         }
+
+        // tell survey which product images to render
+        // track which products are selected
+        // how many can they choose?
+        // button: text changes when on last page
+        // when survey is submitted, results are displayed
+        // on results page, retake quiz or complete subscription
         
         nextPage = () => {
           this.setState(prevState => {
@@ -46,6 +57,7 @@ class Survey extends PureComponent {
               page: prevState.page + 1  
             }
           })
+          console.log(this.state.page)
         }
         
         render() {
