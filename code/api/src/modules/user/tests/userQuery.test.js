@@ -39,6 +39,24 @@ describe('user queries', () => {
     expect(response.body.data.userLogin).toHaveProperty("token");
   });
 
+  it('can get all user emails', async () => {
+    let response = await request(server)
+      .post("/")
+      .send({
+        query: `{ users { email } }`
+      })
+      .expect(200)
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toMatchObject({
+      data: {
+        users: [
+          { email: "admin@crate.com"},
+          { email: "user@crate.com"}
+        ]
+      }
+    })
+  })
 
   afterAll(async done => {
     database.close();
