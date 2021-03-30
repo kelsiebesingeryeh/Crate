@@ -35,23 +35,8 @@ class Survey extends PureComponent {
         
         render() {
           return (
-            <SurveyModal>
-            {/* product display */}
-            <H3 font='secondary'>Style Survey</H3>
-            <Grid style={{zIndex: 3}}>
-              <GridCell>
-                <Card style={{ width: "30%", backgroundColor: "#FFA", zIndex: 4 }}>
-                    <img src={`${ APP_URL }/images/crate.png`} alt={`a box`} style={{ width: '100%' }}/>
-                </Card>
-                {/* individual component */}
-                {/* add onClick on the image. src, alt, style, selected - false by default */}
-                {/* function that iterates over all products to display clickable images */}
-              </GridCell>
-            </Grid>
-            <Button theme="secondary" type="button" onClick={this.nextPage}>
-              Next Page
-            </Button>
-          </SurveyModal>
+            // product display
+            <SurveyModal title="Style Survey" nextPage={this.nextPage} items={[1, 2, 3, 4, 5, 6]}/>
           )
     }
     // this.props.history.push(userRoutes.subscriptions.path)
