@@ -9,7 +9,46 @@
         "id": 2,
         "name": "Accessories"
       }
-    }
+    },
+    "category": {
+      "shirt": {
+        "id": 1,
+        "name": "Shirt"
+      },
+      "bottoms": {
+        "id": 2,
+        "name": "Bottoms"
+      },
+      "jacket": {
+        "id": 3,
+        "name": "Jacket"
+      },
+      "shoes": {
+        "id": 4,
+        "name": "Shoes"
+      },
+      "belt": {
+        "id": 5,
+        "name": "Belt"
+      },
+      "watch": {
+        "id": 6,
+        "name": "Watch"
+      }
+    },
+    "styleTag": {
+      "casual": {
+        "id": 1,
+        "name": "Casual"
+      },
+      "classy": {
+        "id": 2,
+        "name": "Classy"
+      },
+      "edgy": {
+        "id": 3,
+        "name": "Edgy"
+      },
   },
   "user": {
     "roles": {
