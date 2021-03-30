@@ -39,14 +39,15 @@ const SurveyModal = (props) => {
                 {props.items.map((item, i)  => (
                       <Card 
                         key={i}
+                        styleTag={item.styleTag}
                         style={{ 
                           margin: "1%",
                           width: "30%", 
                           backgroundColor: "#FAA", 
                           zIndex: 4 }}>
                             <img 
-                              src={`${ APP_URL }/images/crate.png`} 
-                              alt={`a box`} 
+                              src={item.image} 
+                              alt={item.styleTag} 
                               style={{ width: '100%' }}/>
                       </Card>
                     ))            

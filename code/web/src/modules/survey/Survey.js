@@ -15,13 +15,28 @@ import { white } from "../../ui/common/colors";
 //App Imports
 import { APP_URL } from "../../setup/config/env";
 
+  const object = {
+    name: "Classy Watch for Women Two",
+    slug: "classy-watch-for-women-two",
+    description: "A very classy watch for Women.",
+    styleTag: "params.product.styleTag.classy.id",
+    image: `${APP_URL}/images/crate.png`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  const results = {
+    1: [{ object }, { object }, { object }, { object }, { object }, { object }],
+    2: [{ object }, { object }, { object }, { object }, { object }, { object }],
+    3: [{ object }, { object }, { object }, { object }, { object }, { object }],
+  };
+
 class Survey extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
            isLoading: false,
-           page: 0,
-           products: null,
+           page: 1,
+           products: results,
           }
         }
         
@@ -36,7 +51,7 @@ class Survey extends PureComponent {
         render() {
           return (
             // product display
-            <SurveyModal title="Style Survey" nextPage={this.nextPage} items={[1, 2, 3, 4, 5, 6]}/>
+            <SurveyModal title="Style Survey" nextPage={this.nextPage} items={this.state.products[this.state.page]}/>
           )
     }
     // this.props.history.push(userRoutes.subscriptions.path)
@@ -44,6 +59,16 @@ class Survey extends PureComponent {
   
   export default Survey
   
+  // grouped by category (watches, belts, top, bottoms, etc...)
+  // what needs to get passed in as items - 
+
+  
   
   //    results: [],
   //    history: null 
+
+  // const results = {
+  //   1: [{}, {}, {}, {}, {}, {}],
+  //   2: [{}, {}, {}, {}, {}, {}],
+  //   3: [{}, {}, {}, {}, {}, {}],
+  // };
