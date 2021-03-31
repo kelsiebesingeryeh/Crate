@@ -1,7 +1,7 @@
-import request from 'supertest'; 
-import express from 'express'; 
-import graphqlHTTP from 'express-graphql'; 
-import schema from '../../../setup/schema'; 
+import request from 'supertest';
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
+import schema from '../../../setup/schema';
 import authentication from '../../../setup/authentication'
 import database from '../../../setup/database'
 import { isType } from 'graphql';
