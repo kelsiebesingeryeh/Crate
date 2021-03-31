@@ -26,6 +26,7 @@ const SurveyModal = (props) => {
                 margin: '5% auto',
                 height: '80%',
                 width: '60%',
+                maxWidth: '40rem',
                 backgroundColor: white,
             }}>
               <Grid>
@@ -35,7 +36,7 @@ const SurveyModal = (props) => {
                   <p style={{ marginTop: '1em', color: grey2 }}>Choose two items that fit your style.</p>
                 </GridCell>
               </Grid>
-              <Grid justifyCenter alignCenter>
+              <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
                 {props.items.map((item, i)  => (
                       <Card 
                         key={i}
@@ -43,7 +44,8 @@ const SurveyModal = (props) => {
                         onClick={()=>{console.log(item.styleTag)}}
                         style={{ 
                           margin: "1%",
-                          width: "30%", 
+                          width: "30%",
+                          maxWidth: "12rem",
                           backgroundColor: "#FAA", 
                           zIndex: 4 }}>
                             <img 
