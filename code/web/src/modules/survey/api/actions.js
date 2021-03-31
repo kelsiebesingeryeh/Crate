@@ -41,7 +41,10 @@ export const getProducts = () => {
 
 
 // next page
-export const nextPage = (initialPage) => ({
-  type: SURVEY_NEXT_PAGE,
-  page: initialPage + 1
-})
+export const nextPage = (initialPage) => {
+  dispatch({
+    type: SURVEY_NEXT_PAGE,
+    page: initialPage + 1
+  })
+
+}

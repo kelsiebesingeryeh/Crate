@@ -18,7 +18,7 @@ describe('state', () => {
     expect(actual).toEqual([]);
   })
 
-  it.only('should return state and increase the page', () => {
+  it.only('should return the next page', () => {
     const actionObj = {
       type: 'SURVEY_NEXT_PAGE',
       page: 2}
@@ -29,15 +29,15 @@ describe('state', () => {
   })
   
   it('should have a type SURVEY_GET_PRODUCTS', () => {
-    // const products = ????;
-    // const expectedAction = {
-    //   type: 'SURVEY_GET_PRODUCTS',
-    //   products: {"1": "edgy shirt"}
-    // };
+    const products = ????;
+    const expectedAction = {
+      type: 'SURVEY_GET_PRODUCTS',
+      products: {"1": "edgy shirt"}
+    };
 
-    // const results = getProducts(productId);
+    const results = getProducts(productId);
 
-    // expect(results).toEqual(expectedAction);
+    expect(results).toEqual(expectedAction);
   });
 
   it.only('should have a type SURVEY_NEXT_PAGE', () => {
@@ -46,3 +46,16 @@ describe('state', () => {
     expect(results.page).toEqual(2);
   });
 });
+
+//functional testing
+// do we test if the state has props? test each prop?
+
+
+// KB NOTES - integration testing
+// does the  survey exist?
+// is there a header
+// is there a survey header
+// image display, is it displaying the images
+// next button
+// when i click on an image, is there a check mark
+// when i click on the next button, the next page should appear
