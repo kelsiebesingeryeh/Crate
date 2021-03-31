@@ -13,20 +13,21 @@ describe('product queries', () => {
   beforeAll(() => {
     server.use(authentication)
     server.use(
-      "/", 
+      "/",
       graphqlHTTP(request => ({
-        schema:schema, 
+        schema:schema,
         graphql: false,
         context: {
           auth: {
             user: request.user,
-            isAuthenticated: request.user && request.user.id > 0 
+            isAuthenticated: request.user && request.user.id > 0
               }
             }
         }))
       )
     }
   )
+
   it('returns list of products', async () => {
     let response = await request(server)
       .post("/")
@@ -36,26 +37,33 @@ describe('product queries', () => {
 
     let userToken = response.body.data.userLogin.token
 
-    response = await request(server) 
+    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
-      .send({ 
-        query: `{ surveyProducts(type: 1, gender: 1) { category styleTag image }}` 
+      .send({
+        query: `{ surveyProducts(type: 1, gender: 1){ category products{ category styleTag image } } }`
             })
-    console.log(response.body)
+
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("data");
-    expect(response.body.data).toHaveProperty("products");
-    expect(response.body.data.products).toHaveProperty("shirt");
-    expect(response.body.data.products).toHaveProperty("bottoms");
-    expect(response.body.data.products).toHaveProperty("jacket");
-    let firstShirt = response.body.data.products.shirt[0]
-    expect(firstShirt).toHaveProperty("category");
-    expect(firstShirt).toHaveProperty("styleTag");
-    expect(firstShirt).toHaveProperty("image");
+    expect(response.body).not.toHaveProperty("errors");
+    expect(response.body.data).toHaveProperty("surveyProducts");
+    expect(response.body.data.surveyProducts).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          category: 1,
+          products: expect.arrayContaining([
+            expect.objectContaining({
+              category: 1,
+              styleTag: 3,
+              image: '/images/stock/edgy-shirt-m-1.jpg'
+            })
+          ])
+        })
+      ])
+    )
   });
-
 
   afterAll(async done => {
     database.close();
@@ -66,11 +74,8 @@ describe('product queries', () => {
 
 // data: {
 //   products: {
-//     shirt: [{}], 
+//     shirt: [{}],
 //     bottoms: [{}],
 //     jacket: [{}]
 //   }
 // }
-
-
-
