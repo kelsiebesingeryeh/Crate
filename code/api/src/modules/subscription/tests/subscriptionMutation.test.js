@@ -40,7 +40,7 @@ describe('subscription mutations', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `mutation { subscriptionCreate(crateId: 1) { id } }`
+        query: `mutation { subscriptionCreate(crateId: 7) { id } }`
       })
 
     expect(response.statusCode).toBe(200);
