@@ -14,7 +14,7 @@ const surveyInitialState = {
 }
 
 // State
-export const survey = (state = surveyInitialState, action) => {
+export const surveyReducer = (state = surveyInitialState, action) => {
   switch (action.type) {
     case SURVEY_GET_PRODUCTS:
       return {
