@@ -62,10 +62,15 @@ class Survey extends PureComponent {
         
         render() {
           return (
-            // product display
-            <SurveyModal title="Style Survey" nextPage={this.nextPage} items={this.state.products[this.state.page]}/>
+            <>
+            {this.state.products[this.state.page] ?
+              <SurveyModal title="Style Survey" nextPage={this.nextPage} items={this.state.products[this.state.page]}/>
+            : <SurveyModal title="Results Page" items={this.state.products[1]}/>
+            }
+           </>
           )
-    }
+        }
+        // product display
     // this.props.history.push(userRoutes.subscriptions.path)
   }
   
