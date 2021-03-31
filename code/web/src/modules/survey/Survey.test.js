@@ -5,7 +5,7 @@ describe('Survey', () => {
     expect(true).toEqual(true);
   });
 
-  it('should exist', () => {
+  it.only('should exist', () => {
     expect(true).toEqual(true);
   });
 });
