@@ -65,6 +65,43 @@ describe('product queries', () => {
     )
   });
 
+  it('can query a different type and gender', async () => {
+    let response = await request(server)
+      .post("/")
+      .send({
+        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
+      })
+
+    let userToken = response.body.data.userLogin.token
+
+    response = await request(server)
+      .post("/")
+      .set("Authorization", `Bearer ${userToken}`)
+      .set('Accept', 'application/json')
+      .send({
+        query: `{ surveyProducts(type: 2, gender: 2){ category products{ category styleTag image } } }`
+            })
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty("data");
+    expect(response.body).not.toHaveProperty("errors");
+    expect(response.body.data).toHaveProperty("surveyProducts");
+    expect(response.body.data.surveyProducts).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          category: 6,
+          products: expect.arrayContaining([
+            expect.objectContaining({
+              category: 6,
+              styleTag: 2,
+              image: '/images/stock/classy-watch-f-2.jpg'
+            })
+          ])
+        })
+      ])
+    )
+  });
+
   afterAll(async done => {
     database.close();
     done();
