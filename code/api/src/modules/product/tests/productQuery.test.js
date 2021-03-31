@@ -43,7 +43,7 @@ describe('product queries', () => {
       .send({ 
         query: `{ surveyProducts(type: 1, gender: 1) { category styleTag image }}` 
             })
-
+    console.log(response.body)
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("data");
     expect(response.body.data).toHaveProperty("products");

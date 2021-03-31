@@ -43,3 +43,7 @@ export const productTypes = {
   type: new GraphQLList(ProductTypesType),
   resolve: getTypes
 }
+
+export const surveyProducts = {
+  type: 
+}

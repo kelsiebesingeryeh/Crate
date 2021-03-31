@@ -32,4 +32,14 @@ const ProductTypesType = new GraphQLObjectType({
   })
 })
 
+const SurveyProductType = new GraphQLObjectType({
+  name: 'surveyProductType', 
+  description: 'Survey Products Type', 
+
+  fields: () => ({
+    
+  })
+
+})
+
 export { ProductType, ProductTypesType }
