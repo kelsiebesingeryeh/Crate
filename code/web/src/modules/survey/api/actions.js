@@ -13,31 +13,36 @@ export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 // Actions
 
 // Get list of products
-export const getProducts = (type, gender) => {
-  return axios.post(routeApi, query({
-    operation: 'surveyProducts',
-    variables: { type, gender },
-    fields: ['products { image, styleTag }']
-  }))
-    .then(response => {
-      if (response.status === 200) {
-        dispatch({
-          type: SURVEY_GET_PRODUCTS,
-          isLoading: false,
-          products: response.data.data.products
-        })
-      } else {
-        console.error(response)
-      }
-    })
-    .catch(error => {
-      dispatch({
-        type: SURVEY_GET_PRODUCTS_FAIL,
-        error: 'Some error occurred. Please try again.',
-        isLoading: false
+export const getProducts = (typeAndGender) => {
+  console.log("in actions", typeAndGender)
+  return dispatch => {
+    return axios.post(routeApi, query({
+      operation: 'surveyProducts',
+      variables: typeAndGender,
+      fields: ['products { image, styleTag }']
+    }))
+      .then(response => {
+        if (response.status === 200) {
+          console.log("hello", response)
+          return dispatch({
+            type: SURVEY_GET_PRODUCTS,
+            isLoading: false,
+            products: response.data.data.surveyProducts
+          })
+        } else {
+          console.error(response)
+        }
       })
-    })
-}
+      .catch(error => {
+        
+        dispatch({
+          type: SURVEY_GET_PRODUCTS_FAIL,
+          error: 'Some error occurred. Please try again.',
+          isLoading: false
+        })
+      })
+  }
+} 
 
 
 // next page
