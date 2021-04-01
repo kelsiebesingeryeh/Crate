@@ -15,7 +15,6 @@ export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 
 // Get list of products
 export const getProducts = (typeAndGender) => {
-  console.log("in actions", typeAndGender)
   return dispatch => {
     return axios.post(routeApi, query({
       operation: 'surveyProducts',
@@ -24,7 +23,8 @@ export const getProducts = (typeAndGender) => {
     }))
       .then(response => {
         if (response.status === 200) {
-          console.log("hello", response)
+          con
+
           return dispatch({
             type: SURVEY_GET_PRODUCTS,
             isLoading: false,
@@ -35,7 +35,7 @@ export const getProducts = (typeAndGender) => {
         }
       })
       .catch(error => {
-        
+
         dispatch({
           type: SURVEY_GET_PRODUCTS_FAIL,
           error: 'Some error occurred. Please try again.',
@@ -43,7 +43,7 @@ export const getProducts = (typeAndGender) => {
         })
       })
   }
-} 
+}
 
 
 // next page

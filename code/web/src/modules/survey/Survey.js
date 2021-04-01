@@ -18,13 +18,8 @@ class Survey extends PureComponent {
         super(props)
         this.state = {
            isLoading: false,
-           products: {
-            1: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-            2: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-            3: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-          },
-          }
         }
+      }
 
         // tell survey which product images to render
         // track which products are selected
@@ -65,7 +60,7 @@ class Survey extends PureComponent {
         }
 
         getResults = () => {
-          const results = Object.values(this.props.activeSurvey).flat()
+          const results = Object.values(this.props.survey).flat()
           const selected = results.reduce((acc, prod) =>
             {
               if(prod.selected && prod.styletag in acc) {
