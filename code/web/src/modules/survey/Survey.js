@@ -3,8 +3,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage } from './api/actions'
-import crateRoutes from "../../setup/routes/crate";
+import { getProducts, nextPage, previousPage } from './api/actions'
+import { create } from '../subscription/api/actions';
+import userRoutes from '../../setup/routes/user'
 
 // UI Imports
 import SurveyModal from '../../ui/surveyModal/SurveyModal'
@@ -32,20 +33,44 @@ class Survey extends PureComponent {
         // when survey is submitted, results are displayed
         // on results page, retake quiz or complete subscription
         
-        handleClick = () => {
+        handleNext = () => {
           this.setState({
             isLoading: true
           })
           this.props.nextPage(this.props.survey.page)
         }
+
+        handlePrev = () => {
+          this.setState({
+            isLoading: true
+          })
+          this.props.previousPage(this.props.survey.page)
+        }
+
+        completeSubscription = () => {
+          console.log('this is not done')
+          // post subscription with results, userID, crateID
+          // reset survey store to initial state
+          // this.props.create()
+          this.props.history.push(userRoutes.subscriptions.path)
+        }
         
         render() {
-          const { page } = this.props.survey
+          const { page, products } = this.props.survey
           return (
             <>
-            {this.state.products[page] ?
-              <SurveyModal title="Style Survey" nextPage={this.handleClick} items={this.state.products[page]}/>
-            : <SurveyModal title="Results Page" items={this.state.products[1]}/>
+            {products[page] ?
+              <SurveyModal title="Style Survey" 
+                details="Choose the images that fits your style"
+                nextPage={this.handleNext} 
+                prevPage={this.handlePrev} 
+                page={page}
+                pageCount={products.length}
+                items={products[page].products}/>
+            : <SurveyModal title="Results Page" 
+                details="Here are your results!"
+                completeSubscription={this.completeSubscription}
+                results={"Edgy and Classy"}/>
             }
            </>
           )
@@ -60,7 +85,7 @@ class Survey extends PureComponent {
     }
   }
   
-  export default connect(surveyState, { nextPage, getProducts })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts })(withRouter(Survey))
   
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items - 

@@ -5,12 +5,13 @@ import {
   SURVEY_GET_PRODUCTS,
   SURVEY_GET_PRODUCTS_FAIL,
   SURVEY_NEXT_PAGE,
+  SURVEY_PREVIOUS_PAGE
 } from './actions'
 
 // Initial State
 const surveyInitialState = {
   isLoading: false,
-  page: 1,
+  page: 0,
   products: {}
 }
 
@@ -24,6 +25,12 @@ export const surveyReducer = (state = surveyInitialState, action) => {
       }
 
     case SURVEY_NEXT_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      }
+
+    case SURVEY_PREVIOUS_PAGE:
       return {
         ...state,
         page: action.page,
