@@ -23,8 +23,6 @@ export const getProducts = (typeAndGender) => {
     }))
       .then(response => {
         if (response.status === 200) {
-          con
-
           return dispatch({
             type: SURVEY_GET_PRODUCTS,
             isLoading: false,

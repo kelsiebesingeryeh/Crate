@@ -31,7 +31,6 @@ class Item extends PureComponent {
   }
 
   onClickSubscribe = (type, gender) => {
-    console.log(type, gender)
     this.setState({
       isLoading: true
     })
@@ -40,7 +39,6 @@ class Item extends PureComponent {
 
     this.props.getProducts({ type, gender })
       .then(response => {
-        console.log(response)
         // if (response.data.errors && response.data.errors.length > 0) {
         //   this.props.messageShow(response.data.errors[0].message)
         // } else {
