@@ -59,7 +59,6 @@ export const nextPage = (initialPage) => {
 // previous page
 export const previousPage = (initialPage) => {
   return dispatch => {
-    console.log('shiiiiiiit')
     dispatch({
       type: 'SURVEY_PREVIOUS_PAGE',
       page: initialPage - 1

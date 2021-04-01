@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
 import { getProducts, nextPage, previousPage } from './api/actions'
-import crateRoutes from "../../setup/routes/crate";
+import { create } from '../subscription/api/actions';
+import userRoutes from '../../setup/routes/user'
 
 // UI Imports
 import SurveyModal from '../../ui/surveyModal/SurveyModal'
@@ -50,6 +51,8 @@ class Survey extends PureComponent {
           console.log('this is not done')
           // post subscription with results, userID, crateID
           // reset survey store to initial state
+          // this.props.create()
+          this.props.history.push(userRoutes.subscriptions.path)
         }
         
         render() {
@@ -82,7 +85,7 @@ class Survey extends PureComponent {
     }
   }
   
-  export default connect(surveyState, { nextPage, getProducts })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts })(withRouter(Survey))
   
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items - 
