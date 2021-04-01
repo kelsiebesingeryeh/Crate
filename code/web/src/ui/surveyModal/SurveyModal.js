@@ -62,8 +62,11 @@ const SurveyModal = (props) => {
                 </Grid>
                 <Grid>
                   <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+                    <Button theme="primary" type="button" onClick={props.prevPage}>
+                      ← Back
+                    </Button>
                     <Button theme="secondary" type="button" onClick={props.nextPage}>
-                      Next Page
+                      Next →
                     </Button>
                   </GridCell>
                 </Grid>

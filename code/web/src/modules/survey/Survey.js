@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage } from './api/actions'
+import { getProducts, nextPage, prevPage } from './api/actions'
 import crateRoutes from "../../setup/routes/crate";
 
 // UI Imports
@@ -32,11 +32,18 @@ class Survey extends PureComponent {
         // when survey is submitted, results are displayed
         // on results page, retake quiz or complete subscription
         
-        handleClick = () => {
+        handleNext = () => {
           this.setState({
             isLoading: true
           })
           this.props.nextPage(this.props.survey.page)
+        }
+
+        handlePrev = () => {
+          this.setState({
+            isLoading: true
+          })
+          this.props.prevPage(this.props.survey.page)
         }
         
         render() {
@@ -44,7 +51,10 @@ class Survey extends PureComponent {
           return (
             <>
             {products[page] ?
-              <SurveyModal title="Style Survey" nextPage={this.handleClick} items={products[page].products}/>
+              <SurveyModal title="Style Survey" 
+                nextPage={this.handleNext} 
+                prevPage={this.handlePrev} 
+                items={products[page].products}/>
             : <SurveyModal title="Results Page" items={products[1].products}/>
             }
            </>

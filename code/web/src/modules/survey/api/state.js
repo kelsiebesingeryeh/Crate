@@ -11,7 +11,7 @@ import {
 // Initial State
 const surveyInitialState = {
   isLoading: false,
-  page: 1,
+  page: 0,
   products: {}
 }
 
