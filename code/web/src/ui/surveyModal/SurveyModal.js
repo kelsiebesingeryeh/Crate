@@ -41,27 +41,27 @@ const SurveyModal = (props) => {
               </Grid>
               <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
                 {props.items ? props.items.map((item, i)  => (
-                      <Card 
+                      <Card
                         key={i}
                         styleTag={item.styleTag}
                         onClick={()=>{console.log(item.styleTag)}}
-                        style={{ 
+                        style={{
                           margin: "1%",
                           width: "30%",
                           height: "12rem",
                           maxWidth: "12rem",
-                          // backgroundColor: "#FAA", 
-                          zIndex: 4, 
+                          // backgroundColor: "#FAA",
+                          zIndex: 4,
                           backgroundImage: `url(${item.image})`,
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover" }}>
-                            {/* <img 
-                              src={item.image} 
-                              alt={item.styleTag} 
+                            {/* <img
+                              src={item.image}
+                              alt={item.styleTag}
                               style={{ width: '100%' }}/> */}
                       </Card>
-                    ))            
-                  : 
+                    ))
+                  :
                   <GridCell style={{ padding: '2em', textAlign: 'center' }}>
                     <p>You Are...</p>
                     <H3 font="secondary">{props.results}</H3>
@@ -86,7 +86,7 @@ const SurveyModal = (props) => {
                       + Subscription
                     </Button>
                   </GridCell>
-                } 
+                }
                 </Grid>
             </div>
         </div>
