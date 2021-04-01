@@ -9,7 +9,7 @@ import { routeApi } from '../../../setup/routes'
 export const SURVEY_GET_PRODUCTS = 'SURVEY_GET_PRODUCTS'
 export const SURVEY_GET_PRODUCTS_FAIL = 'SURVEY_GET_PRODUCTS_FAIL'
 export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
-export const SURVEY_PREV_PAGE = 'SURVEY_PREV_PAGE'
+export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 
 // Actions
 
@@ -57,10 +57,11 @@ export const nextPage = (initialPage) => {
 }
 
 // previous page
-export const prevPage = (initialPage) => {
+export const previousPage = (initialPage) => {
   return dispatch => {
+    console.log('shiiiiiiit')
     dispatch({
-      type: 'SURVEY_PREV_PAGE',
+      type: 'SURVEY_PREVIOUS_PAGE',
       page: initialPage - 1
     })
   }

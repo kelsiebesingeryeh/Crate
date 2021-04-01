@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, prevPage } from './api/actions'
+import { getProducts, nextPage, previousPage } from './api/actions'
 import crateRoutes from "../../setup/routes/crate";
 
 // UI Imports
@@ -43,7 +43,7 @@ class Survey extends PureComponent {
           this.setState({
             isLoading: true
           })
-          this.props.prevPage(this.props.survey.page)
+          this.props.previousPage(this.props.survey.page)
         }
         
         render() {

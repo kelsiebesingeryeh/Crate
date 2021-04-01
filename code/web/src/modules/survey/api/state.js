@@ -5,7 +5,7 @@ import {
   SURVEY_GET_PRODUCTS,
   SURVEY_GET_PRODUCTS_FAIL,
   SURVEY_NEXT_PAGE,
-  SURVEY_PREV_PAGE
+  SURVEY_PREVIOUS_PAGE
 } from './actions'
 
 // Initial State
@@ -30,11 +30,11 @@ export const surveyReducer = (state = surveyInitialState, action) => {
         page: action.page,
       }
 
-      case SURVEY_PREV_PAGE:
-        return {
-          ...state,
-          page: action.page,
-        }
+    case SURVEY_PREVIOUS_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      }
 
     default:
       return state
