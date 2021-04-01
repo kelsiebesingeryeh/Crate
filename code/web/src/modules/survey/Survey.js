@@ -32,7 +32,7 @@ class Survey extends PureComponent {
         // button: text changes when on last page
         // when survey is submitted, results are displayed
         // on results page, retake quiz or complete subscription
-        
+
         handleNext = () => {
           this.setState({
             isLoading: true
@@ -54,20 +54,44 @@ class Survey extends PureComponent {
           // this.props.create()
           this.props.history.push(userRoutes.subscriptions.path)
         }
-        
+
+        genDesc = (selected) => {
+          const sorted = Object.keys(selected).sort((a, b) => selected[b] - selected[a])
+          if (sorted.length > 1) {
+            return `${sorted[0]} and ${sorted[1]}`
+          } else {
+            return sorted[0]
+          }
+        }
+
+        getResults = () => {
+          const results = Object.values('').flat()
+          const selected = results.reduce((acc, prod) =>
+            {
+              if(prod.selected && prod.styleTag in acc) {
+                acc[prod.styleTag]++
+              } else if(prod.selected) {
+                acc[prod.styleTag] = 1
+              }
+              return acc
+            }, {})
+
+          return this.genDesc(selected)
+        }
+
         render() {
           const { page, products } = this.props.survey
           return (
             <>
             {products[page] ?
-              <SurveyModal title="Style Survey" 
+              <SurveyModal title="Style Survey"
                 details="Choose the images that fits your style"
-                nextPage={this.handleNext} 
-                prevPage={this.handlePrev} 
+                nextPage={this.handleNext}
+                prevPage={this.handlePrev}
                 page={page}
                 pageCount={products.length}
                 items={products[page].products}/>
-            : <SurveyModal title="Results Page" 
+            : <SurveyModal title="Results Page"
                 details="Here are your results!"
                 completeSubscription={this.completeSubscription}
                 results={"Edgy and Classy"}/>
@@ -84,8 +108,8 @@ class Survey extends PureComponent {
       survey: state.survey
     }
   }
-  
+
   export default connect(surveyState, { nextPage, previousPage, getProducts })(withRouter(Survey))
-  
+
   // grouped by category (watches, belts, top, bottoms, etc...)
-  // what needs to get passed in as items - 
+  // what needs to get passed in as items -
