@@ -40,12 +40,12 @@ class Survey extends PureComponent {
         }
         
         render() {
-          const { page } = this.props.survey
+          const { page, products } = this.props.survey
           return (
             <>
-            {this.state.products[page] ?
-              <SurveyModal title="Style Survey" nextPage={this.handleClick} items={this.state.products[page]}/>
-            : <SurveyModal title="Results Page" items={this.state.products[1]}/>
+            {products[page] ?
+              <SurveyModal title="Style Survey" nextPage={this.handleClick} items={products[page].products}/>
+            : <SurveyModal title="Results Page" items={products[1].products}/>
             }
            </>
           )

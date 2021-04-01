@@ -45,13 +45,17 @@ const SurveyModal = (props) => {
                         style={{ 
                           margin: "1%",
                           width: "30%",
+                          height: "12rem",
                           maxWidth: "12rem",
-                          backgroundColor: "#FAA", 
-                          zIndex: 4 }}>
-                            <img 
+                          // backgroundColor: "#FAA", 
+                          zIndex: 4, 
+                          backgroundImage: `url(${item.image})`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundSize: "cover" }}>
+                            {/* <img 
                               src={item.image} 
                               alt={item.styleTag} 
-                              style={{ width: '100%' }}/>
+                              style={{ width: '100%' }}/> */}
                       </Card>
                     ))            
                   }
