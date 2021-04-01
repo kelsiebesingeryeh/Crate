@@ -1,6 +1,34 @@
 // App Imports
 import params from '../../config/params'
 import models from '../../setup/models'
+import { Op } from 'sequelize'
+
+// Survey products
+export async function getSurveyProducts(parentValue, { type, gender }, { auth }) {
+  if(auth.user && auth.user.id > 0) {
+    const products = await models.Product.findAll({
+      where: {
+        type: type ? type : {[Op.or]: [1, 2]},
+        gender: gender
+      }
+    });
+    const groups = products.reduce((groups, product) => {
+      let category = product.category;
+      groups[category] = [...groups[category] || [], product];
+      return groups;
+    }, {});
+    const formatted_groups = Object.entries(groups).reduce((fmt, group) => {
+      fmt.push({
+        "category": group[0],
+        "products": group[1]
+      })
+      return fmt
+    }, []);
+    return formatted_groups
+  } else {
+    throw new Error('Please login to subscribe to this crate.')
+  }
+}
 
 // Get all products
 export async function getAll() {

@@ -2,8 +2,8 @@
 import { GraphQLString, GraphQLInt, GraphQLList } from 'graphql'
 
 // App Imports
-import { ProductType, ProductTypesType } from './types'
-import { getAll, getBySlug, getById, getRelated, getTypes } from './resolvers'
+import { ProductType, ProductTypesType, SurveyProductType } from './types'
+import { getAll, getBySlug, getById, getRelated, getTypes, getSurveyProducts } from './resolvers'
 
 // Products All
 export const products = {
@@ -42,4 +42,13 @@ export const productsRelated = {
 export const productTypes = {
   type: new GraphQLList(ProductTypesType),
   resolve: getTypes
+}
+
+export const surveyProducts = {
+  type: new GraphQLList(SurveyProductType),
+  args: {
+    type: { type: GraphQLInt },
+    gender: { type: GraphQLInt}
+  },
+  resolve: getSurveyProducts
 }

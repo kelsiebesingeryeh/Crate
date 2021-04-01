@@ -26,7 +26,7 @@ describe('subscription mutations', () => {
     )
   });
 
-  it('can create a subscription', async () => {
+  it.skip('can create a subscription', async () => {
     let response = await request(server)
       .post("/")
       .send({
@@ -40,7 +40,7 @@ describe('subscription mutations', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `mutation { subscriptionCreate(crateId: 1) { id } }`
+        query: `mutation { subscriptionCreate(crateId: 7) { id } }`
       })
 
     expect(response.statusCode).toBe(200);
