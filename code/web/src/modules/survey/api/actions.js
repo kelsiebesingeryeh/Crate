@@ -42,9 +42,10 @@ export const getProducts = (type, gender) => {
 
 // next page
 export const nextPage = (initialPage) => {
-  dispatch({
-    type: SURVEY_NEXT_PAGE,
-    page: initialPage + 1
-  })
-
+  return dispatch => {
+    dispatch({
+      type: 'SURVEY_NEXT_PAGE',
+      page: initialPage + 1
+    })
+  }
 }
