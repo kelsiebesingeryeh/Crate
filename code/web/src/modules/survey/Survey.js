@@ -45,6 +45,12 @@ class Survey extends PureComponent {
           })
           this.props.previousPage(this.props.survey.page)
         }
+
+        completeSubscription = () => {
+          console.log('this is not done')
+          // post subscription with results, userID, crateID
+          // reset survey store to initial state
+        }
         
         render() {
           const { page, products } = this.props.survey
@@ -60,6 +66,7 @@ class Survey extends PureComponent {
                 items={products[page].products}/>
             : <SurveyModal title="Results Page" 
                 details="Here are your results!"
+                completeSubscription={this.completeSubscription}
                 results={"Edgy and Classy"}/>
             }
            </>

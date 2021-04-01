@@ -81,7 +81,7 @@ const SurveyModal = (props) => {
                     <Button theme="primary" type="button" onClick={props.prevPage}>
                       Retake Quiz
                     </Button>
-                    <Button theme="secondary" type="button" onClick={props.nextPage}>
+                    <Button theme="secondary" type="button" onClick={props.completeSubscription}>
                       + Subscription
                     </Button>
                   </GridCell>
