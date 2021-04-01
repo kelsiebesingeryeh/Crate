@@ -56,13 +56,13 @@ export function slug(text) {
 
 //Format surveyModal
 export function formatSurvey(products) {
-  const surveyProducts = {}
-  for (key in products) {
-    surveyProducts[parseInt(key) + 1] = products[key].products.map(product => {
-      product.selected = false
+  const surveyProducts = products.reduce((acc, listObj, i) => {
+    acc[i + 1] = listObj.products.map(product => {
+      product.select = false
       return product
     })
-  }
+    return acc
+  }, {})
 
   return surveyProducts
 }

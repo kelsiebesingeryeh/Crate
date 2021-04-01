@@ -4,6 +4,7 @@ import { query, mutation } from 'gql-query-builder'
 
 // App Imports
 import { routeApi } from '../../../setup/routes'
+import { formatSurvey } from '../../../setup/helpers'
 
 // Actions Types
 export const SURVEY_GET_PRODUCTS = 'SURVEY_GET_PRODUCTS'
@@ -22,11 +23,12 @@ export const getProducts = (typeAndGender) => {
       fields: ['products { image, styleTag }']
     }))
       .then(response => {
+        const products = formatSurvey(response.data.data.surveyProducts)
         if (response.status === 200) {
           return dispatch({
             type: SURVEY_GET_PRODUCTS,
             isLoading: false,
-            products: response.data.data.surveyProducts
+            products: products
           })
         } else {
           console.error(response)
