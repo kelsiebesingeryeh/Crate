@@ -35,7 +35,8 @@ const SurveyModal = (props) => {
 
                   <p style={{ marginTop: '1em', color: grey2 }}>{props.details}</p>
 
-                  <p style={{ marginTop: '1em', color: grey2 }}>Page {props.page + 1}/{props.pageCount}</p>
+                  {props.page <= props.pageCount &&
+                  <p style={{ marginTop: '1em', color: grey2 }}>Page {props.page + 1}/{props.pageCount}</p>}
                 </GridCell>
               </Grid>
               <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
