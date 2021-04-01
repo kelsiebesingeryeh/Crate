@@ -53,3 +53,28 @@ export function slug(text) {
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '')            // Trim - from end of text
 }
+
+//Format surveyModal
+{
+  0: {
+    products: [{}, {}]
+  },
+  1: {
+    products: [{}, {}]
+  },
+  2: {
+    products: [{}, {}]
+  }
+}
+
+export function formatSurvey(products) {
+  const surveyProducts = {}
+  for (key in products) {
+    surveyProducts[parseInt(key) + 1] = products[key].products.map(product => {
+      product.selected = false
+      return product
+    })
+  }
+
+  return surveyProducts
+}
