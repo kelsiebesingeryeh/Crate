@@ -24,7 +24,6 @@ export const surveyReducer = (state = surveyInitialState, action) => {
       }
 
     case SURVEY_NEXT_PAGE:
-      console.log('in the case')
       return {
         ...state,
         page: action.page,
