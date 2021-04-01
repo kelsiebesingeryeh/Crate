@@ -11,6 +11,7 @@ export const SURVEY_GET_PRODUCTS = 'SURVEY_GET_PRODUCTS'
 export const SURVEY_GET_PRODUCTS_FAIL = 'SURVEY_GET_PRODUCTS_FAIL'
 export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
+export const SURVEY_CLEAR = 'SURVEY_CLEAR'
 
 // Actions
 
@@ -42,6 +43,16 @@ export const getProducts = (typeAndGender) => {
           isLoading: false
         })
       })
+  }
+}
+
+//clear survey
+export const clearSurvey = () => {
+  return dispatch => {
+    dispatch({
+      type: 'SURVEY_CLEAR',
+      products: {}
+    })
   }
 }
 

@@ -104,7 +104,7 @@ class Survey extends PureComponent {
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey })(withRouter(Survey))
 
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items -
