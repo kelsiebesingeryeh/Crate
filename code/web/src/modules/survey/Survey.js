@@ -65,13 +65,13 @@ class Survey extends PureComponent {
         }
 
         getResults = () => {
-          const results = Object.values('').flat()
+          const results = Object.values(this.props.activeSurvey).flat()
           const selected = results.reduce((acc, prod) =>
             {
-              if(prod.selected && prod.styleTag in acc) {
-                acc[prod.styleTag]++
+              if(prod.selected && prod.styletag in acc) {
+                acc[prod.styletag]++
               } else if(prod.selected) {
-                acc[prod.styleTag] = 1
+                acc[prod.styletag] = 1
               }
               return acc
             }, {})
