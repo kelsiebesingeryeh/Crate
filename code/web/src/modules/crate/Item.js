@@ -17,6 +17,7 @@ import userRoutes from '../../setup/routes/user'
 import crateRoute from '../../setup/routes/crate'
 import { messageShow, messageHide } from '../common/api/actions'
 import { create } from '../subscription/api/actions'
+import { getProducts } from '../survey/api/actions'
 
 // Component
 class Item extends PureComponent {
@@ -29,24 +30,25 @@ class Item extends PureComponent {
     }
   }
 
-  onClickSubscribe = (crateId) => {
+  onClickSubscribe = (type, gender) => {
+    console.log(type, gender)
     this.setState({
       isLoading: true
     })
 
     this.props.messageShow('Subscribing, please wait...')
 
-    this.props.create({ crateId })
+    this.props.getProducts({ type, gender })
       .then(response => {
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message)
-        } else {
-          this.props.messageShow('Subscribed successfully.')
-
+        console.log(response)
+        // if (response.data.errors && response.data.errors.length > 0) {
+        //   this.props.messageShow(response.data.errors[0].message)
+        // } else {
           this.props.history.push(crateRoute.survey.path)
-        }
+        // }
       })
       .catch(error => {
+        console.log(error)
         this.props.messageShow('There was some error subscribing to this crate. Please try again.')
       })
       .then(() => {
@@ -61,7 +63,7 @@ class Item extends PureComponent {
   }
 
   render() {
-    const { id, name, description } = this.props.crate
+    const { id, name, description, type, gender } = this.props.crate
     const { isLoading } = this.state
 
     return (
@@ -78,7 +80,7 @@ class Item extends PureComponent {
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
             <Button
               theme="primary"
-              onClick={this.onClickSubscribe.bind(this, id)}
+              onClick={this.onClickSubscribe.bind(this, type, gender)}
               type="button"
               disabled={ isLoading }
             >
@@ -106,4 +108,4 @@ function itemState(state) {
   }
 }
 
-export default connect(itemState, { create, messageShow, messageHide })(withRouter(Item))
+export default connect(itemState, { getProducts, messageShow, messageHide })(withRouter(Item))

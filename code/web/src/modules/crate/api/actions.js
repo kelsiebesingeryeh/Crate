@@ -27,7 +27,7 @@ export function getList(orderBy = 'DESC', isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'crates',
       variables: { orderBy },
-      fields: ['id', 'name', 'description', 'createdAt', 'updatedAt']
+      fields: ['id', 'type', 'gender', 'name', 'description', 'createdAt', 'updatedAt']
     }))
       .then(response => {
         if (response.status === 200) {
