@@ -13,10 +13,11 @@ export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 // Actions
 
 // Get list of products
-export const getProducts = () => {
+export const getProducts = (type, gender) => {
   return axios.post(routeApi, query({
-    operation: 'products',
-    fields: ['id', 'user { name, email }', 'crate { id, name, description }', 'createdAt']
+    operation: 'surveyProducts',
+    variables: { type, gender },
+    fields: ['products { image, styleTag }']
   }))
     .then(response => {
       if (response.status === 200) {
