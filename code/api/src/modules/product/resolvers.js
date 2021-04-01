@@ -1,13 +1,14 @@
 // App Imports
 import params from '../../config/params'
 import models from '../../setup/models'
+import { Op } from 'sequelize'
 
 // Survey products
 export async function getSurveyProducts(parentValue, { type, gender }, { auth }) {
   if(auth.user && auth.user.id > 0) {
     const products = await models.Product.findAll({
       where: {
-        type: type,
+        type: type ? type : {[Op.or]: [1, 2]},
         gender: gender
       }
     });
