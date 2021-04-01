@@ -55,18 +55,6 @@ export function slug(text) {
 }
 
 //Format surveyModal
-{
-  0: {
-    products: [{}, {}]
-  },
-  1: {
-    products: [{}, {}]
-  },
-  2: {
-    products: [{}, {}]
-  }
-}
-
 export function formatSurvey(products) {
   const surveyProducts = {}
   for (key in products) {
