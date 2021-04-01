@@ -18,38 +18,44 @@ describe('state', () => {
     expect(actual).toEqual([]);
   })
 
-  it.only('should return the next page', () => {
+  it('should update the survey page', () => {
     const actionObj = {
       type: 'SURVEY_NEXT_PAGE',
-      page: 2}
+      page: 2
+    }
 
     const results = surveyReducer(undefined, actionObj)
 
     expect(results).toEqual({"isLoading": false, "page": 2, "products": {}});
   })
   
-  it('should have a type SURVEY_GET_PRODUCTS', () => {
-    const products = ????;
-    const expectedAction = {
+  it('should update the state to include products', () => {
+    let actionObj = {
       type: 'SURVEY_GET_PRODUCTS',
-      products: {"1": "edgy shirt"}
+      products: {}
     };
+    const results = surveyReducer(undefined, actionObj)
+    expect(results.products).toEqual({});
 
-    const results = getProducts(productId);
-
-    expect(results).toEqual(expectedAction);
-  });
-
-  it.only('should have a type SURVEY_NEXT_PAGE', () => {
-    const page = 1
-    const results = nextPage(page)
-    expect(results.page).toEqual(2);
+    actionObj = {
+      type: 'SURVEY_GET_PRODUCTS',
+      products:  {"1": "edgy shirt"}
+    };
+    const newResults = surveyReducer(results, actionObj)
+    expect(newResults.products).toEqual({"1": "edgy shirt"});
   });
 });
 
+// describe('actions', () => {
+//   it('should increase the page by 1', () => {
+//     const page = 1
+//     const results = nextPage(page)
+//     expect(results.page).toEqual(2);
+//   });
+// });
+
 //functional testing
 // do we test if the state has props? test each prop?
-
 
 // KB NOTES - integration testing
 // does the  survey exist?
@@ -58,4 +64,4 @@ describe('state', () => {
 // image display, is it displaying the images
 // next button
 // when i click on an image, is there a check mark
-// when i click on the next button, the next page should appear
+// when i click on the next button, the next page should

@@ -23,7 +23,6 @@ export const getProducts = () => {
         dispatch({
           type: SURVEY_GET_PRODUCTS,
           isLoading: false,
-          page: 1,
           products: response.data.data.products
         })
       } else {
