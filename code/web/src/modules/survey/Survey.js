@@ -52,10 +52,15 @@ class Survey extends PureComponent {
             <>
             {products[page] ?
               <SurveyModal title="Style Survey" 
+                details="Choose the images that fits your style"
                 nextPage={this.handleNext} 
                 prevPage={this.handlePrev} 
+                page={page}
+                pageCount={products.length}
                 items={products[page].products}/>
-            : <SurveyModal title="Results Page" items={products[1].products}/>
+            : <SurveyModal title="Results Page" 
+                details="Here are your results!"
+                results={"Edgy and Classy"}/>
             }
            </>
           )

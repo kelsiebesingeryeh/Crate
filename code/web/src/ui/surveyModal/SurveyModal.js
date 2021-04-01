@@ -33,11 +33,13 @@ const SurveyModal = (props) => {
                 <GridCell style={{ padding: '2em', textAlign: 'center' }}>
                   <H3 font="secondary">{props.title}</H3>
 
-                  <p style={{ marginTop: '1em', color: grey2 }}>Choose two items that fit your style.</p>
+                  <p style={{ marginTop: '1em', color: grey2 }}>{props.details}</p>
+
+                  <p style={{ marginTop: '1em', color: grey2 }}>Page {props.page + 1}/{props.pageCount}</p>
                 </GridCell>
               </Grid>
               <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
-                {props.items.map((item, i)  => (
+                {props.items ? props.items.map((item, i)  => (
                       <Card 
                         key={i}
                         styleTag={item.styleTag}
@@ -58,9 +60,15 @@ const SurveyModal = (props) => {
                               style={{ width: '100%' }}/> */}
                       </Card>
                     ))            
+                  : 
+                  <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+                    <p>You Are...</p>
+                    <H3 font="secondary">{props.results}</H3>
+                  </GridCell>
                   }
                 </Grid>
                 <Grid>
+                  {props.pageCount > props.page ?
                   <GridCell style={{ padding: '2em', textAlign: 'center' }}>
                     <Button theme="primary" type="button" onClick={props.prevPage}>
                       ← Back
@@ -69,6 +77,15 @@ const SurveyModal = (props) => {
                       Next →
                     </Button>
                   </GridCell>
+                  : <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+                    <Button theme="primary" type="button" onClick={props.prevPage}>
+                      Retake Quiz
+                    </Button>
+                    <Button theme="secondary" type="button" onClick={props.nextPage}>
+                      + Subscription
+                    </Button>
+                  </GridCell>
+                } 
                 </Grid>
             </div>
         </div>
