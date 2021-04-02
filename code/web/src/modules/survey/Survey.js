@@ -73,10 +73,10 @@ class Survey extends PureComponent {
         }
 
         completeSubscription = () => {
-          console.log('this is not done')
-          // post subscription with results, userID, crateID
-          // reset survey store to initial state
-          // this.props.create()
+          //send survey to server
+          //if 200 code re-route
+          //
+
           this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
         }
