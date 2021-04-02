@@ -38,15 +38,9 @@ describe('product queries', () => {
   });
 
   it('can query a different type and gender', async () => {
+    let userToken = await userLogin()
+
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
@@ -75,15 +69,9 @@ describe('product queries', () => {
   });
 
   it('can query without a type', async () => {
+    let userToken = await userLogin()
+    
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
@@ -116,11 +104,3 @@ describe('product queries', () => {
   });
 })
 
-
-// data: {
-//   products: {
-//     shirt: [{}],
-//     bottoms: [{}],
-//     jacket: [{}]
-//   }
-// }
