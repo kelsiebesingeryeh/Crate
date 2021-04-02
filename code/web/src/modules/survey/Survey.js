@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey } from './api/actions'
 import { create } from '../subscription/api/actions';
 import userRoutes from '../../setup/routes/user'
 
@@ -42,14 +42,6 @@ class Survey extends PureComponent {
           this.props.previousPage(this.props.survey.page)
         }
 
-        completeSubscription = () => {
-          console.log('this is not done')
-          // post subscription with results, userID, crateID
-          // reset survey store to initial state
-          // this.props.create()
-          this.props.history.push(userRoutes.subscriptions.path)
-        }
-
         genDesc = (selected) => {
           const sorted = Object.keys(selected).sort((a, b) => selected[b] - selected[a])
           if (sorted.length > 1) {
@@ -74,23 +66,33 @@ class Survey extends PureComponent {
           return this.genDesc(selected)
         }
 
+        completeSubscription = () => {
+          console.log('this is not done')
+          // post subscription with results, userID, crateID
+          // reset survey store to initial state
+          // this.props.create()
+          this.props.clearSurvey()
+          this.props.history.push(userRoutes.subscriptions.path)
+        }
+
         render() {
           const { page, products } = this.props.survey
           return (
             <>
-            {products[page] ?
-              <SurveyModal title="Style Survey"
-                details="Choose the images that fits your style"
-                nextPage={this.handleNext}
-                prevPage={this.handlePrev}
-                page={page}
-                pageCount={products.length}
-                items={products[page].products}/>
-            : <SurveyModal title="Results Page"
-                details="Here are your results!"
-                completeSubscription={this.completeSubscription}
-                results={"Edgy and Classy"}/>
-            }
+              {Array.isArray(products[page]) ?
+                <SurveyModal title="Style Survey"
+                  details="Choose the images that fits your style"
+                  nextPage={this.handleNext}
+                  prevPage={this.handlePrev}
+                  page={page}
+                  pageCount={Object.keys(products).length + 1}
+                  items={products[page]}/>
+              : <SurveyModal title="Results Page"
+                  details="Here are your results!"
+                  completeSubscription={this.completeSubscription}
+                  results={this.getResults()}
+                />
+              }
            </>
           )
         }

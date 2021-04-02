@@ -28,7 +28,8 @@ export const surveyReducer = (state = surveyInitialState, action) => {
     case SURVEY_CLEAR:
       return {
         ...state,
-        products: action.products
+        products: action.products,
+        page: action.page
       }
 
     case SURVEY_NEXT_PAGE:

@@ -46,12 +46,18 @@ export const getProducts = (typeAndGender) => {
   }
 }
 
+//select product
+export const selectProduct = () => {
+  
+}
+
 //clear survey
 export const clearSurvey = () => {
   return dispatch => {
     dispatch({
       type: 'SURVEY_CLEAR',
-      products: {}
+      products: {},
+      page: 1
     })
   }
 }
