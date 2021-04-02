@@ -1,30 +1,9 @@
 import request from 'supertest';
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import schema from '../../../setup/schema';
-import authentication from '../../../setup/authentication'
-import database from '../../../setup/database';
+import { server, init } from '../../../../test/testHelper';
+
 
 describe('subscription mutations', () => {
-  let server = express();
-
-  beforeAll(() => {
-    server.use(authentication)
-
-    server.use(
-      "/",
-      graphqlHTTP(request => ({
-        schema: schema,
-        graphiql: false,
-        context: {
-          auth: {
-            user: request.user,
-            isAuthenticated: request.user && request.user.id > 0
-          }
-        }
-      }))
-    )
-  });
+  init()
 
   it('can create a subscription', async () => {
     let response = await request(server)
@@ -48,11 +27,5 @@ describe('subscription mutations', () => {
     expect(response.body.data).toHaveProperty("subscriptionCreate");
     let newSubscription = response.body.data.subscriptionCreate
     expect(newSubscription).toHaveProperty("id");
-  });
-
-
-  afterAll(async done => {
-    database.close();
-    done();
   });
 });
