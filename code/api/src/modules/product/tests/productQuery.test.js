@@ -14,7 +14,7 @@ describe('product queries', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(type: 1, gender: 1){ category products{ category styleTag image } } }`
+        query: `{ surveyProducts(type: 1, gender: 1){ products{ category styleTag image } } }`
             })
 
     expect(response.statusCode).toBe(200);
@@ -24,7 +24,6 @@ describe('product queries', () => {
     expect(response.body.data.surveyProducts).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          category: 1,
           products: expect.arrayContaining([
             expect.objectContaining({
               category: 1,
@@ -45,7 +44,7 @@ describe('product queries', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(type: 2, gender: 2){ category products{ category styleTag image } } }`
+        query: `{ surveyProducts(type: 2, gender: 2){ products{ category styleTag image } } }`
             })
 
     expect(response.statusCode).toBe(200);
@@ -55,7 +54,6 @@ describe('product queries', () => {
     expect(response.body.data.surveyProducts).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          category: 6,
           products: expect.arrayContaining([
             expect.objectContaining({
               category: 6,
@@ -76,7 +74,7 @@ describe('product queries', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(gender: 2){ category products{ category styleTag image type } } }`
+        query: `{ surveyProducts(gender: 2){ products{ category styleTag image type } } }`
             })
 
     expect(response.statusCode).toBe(200);

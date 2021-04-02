@@ -57,7 +57,6 @@ const SurveyProductType = new GraphQLObjectType({
   description: 'Survey Products Type',
 
   fields: () => ({
-    category: { type: GraphQLInt },
     products: { type: new GraphQLList(ProductType) }
   })
 })
