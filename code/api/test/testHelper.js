@@ -1,9 +1,9 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql'; 
 import schema from '../src/setup/schema';
-import authentication from '../src/setup/authentication'
-import database from '../src/setup/database'
-
+import authentication from '../src/setup/authentication';
+import database from '../src/setup/database';
+import request from 'supertest'
 
 
 let server = express();
@@ -25,11 +25,19 @@ function init() {
       )
     }
   )
-
   afterAll(async done => {
     database.close();
     done();
   });
 }
 
-export { server, init } 
+async function userLogin() { 
+  let response = await request(server)
+    .post("/")
+    .send({
+      query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
+    })
+  return response.body.data.userLogin.token  
+  }
+
+export { server, init, userLogin } 
