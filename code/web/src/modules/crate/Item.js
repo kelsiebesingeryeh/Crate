@@ -38,7 +38,9 @@ class Item extends PureComponent {
 
     this.props.messageShow('Subscribing, please wait...')
 
-    this.props.getProducts({ type, gender })
+    const postObject = type === null ? { gender } : { type, gender }
+
+    this.props.getProducts(postObject)
       .then(response => {
         console.log(response)
         // if (response.data.errors && response.data.errors.length > 0) {
