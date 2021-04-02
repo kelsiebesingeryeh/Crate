@@ -8,6 +8,7 @@ import { create } from '../subscription/api/actions';
 import userRoutes from '../../setup/routes/user';
 import { styleToString } from '../../setup/helpers'
 
+
 // UI Imports
 import SurveyModal from '../../ui/surveyModal/SurveyModal'
 
@@ -63,7 +64,6 @@ class Survey extends PureComponent {
               }
               return acc
             }, {})
-            console.log(selected)
 
           return this.genDesc(selected)
         }
@@ -73,10 +73,10 @@ class Survey extends PureComponent {
         }
 
         completeSubscription = () => {
-          //send survey to server
+          //send getResults() to server
           //if 200 code re-route
-          //
-
+          //if not handle error? or we can figure that out tomorrow
+          
           this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
         }
