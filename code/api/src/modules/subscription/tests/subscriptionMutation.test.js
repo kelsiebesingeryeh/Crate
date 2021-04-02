@@ -26,7 +26,7 @@ describe('subscription mutations', () => {
     )
   });
 
-  it.skip('can create a subscription', async () => {
+  it('can create a subscription', async () => {
     let response = await request(server)
       .post("/")
       .send({
@@ -40,9 +40,9 @@ describe('subscription mutations', () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `mutation { subscriptionCreate(crateId: 7) { id } }`
+        query: `mutation { subscriptionCreate(crateId: 7, style: "Edgy") { id } }`
       })
-
+      console.log(response.body)
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("data");
     expect(response.body.data).toHaveProperty("subscriptionCreate");
