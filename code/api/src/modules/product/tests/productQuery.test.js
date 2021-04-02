@@ -1,20 +1,15 @@
 import request from 'supertest';
-import { server, init} from '../../../../test/testHelper';
+import { server, init, userLogin} from '../../../../test/testHelper';
 
 
 describe('product queries', () => {
   init()
-
+  
   it('returns list of products', async () => {
+    let userToken = await userLogin()
+
+
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
