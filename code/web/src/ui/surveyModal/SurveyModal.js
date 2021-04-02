@@ -42,7 +42,8 @@ const SurveyModal = (props) => {
               <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
                 {props.items ? props.items.map((item, i)  => (
                       <Card
-                        key={i}
+                        key={item.id}
+                        id={item.id}
                         styleTag={item.styleTag}
                         onClick={()=>{console.log(item.styleTag)}}
                         style={{

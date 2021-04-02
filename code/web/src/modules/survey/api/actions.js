@@ -21,7 +21,7 @@ export const getProducts = (typeAndGender) => {
     return axios.post(routeApi, query({
       operation: 'surveyProducts',
       variables: typeAndGender,
-      fields: ['products { image, styleTag }']
+      fields: ['products { image, styleTag, id }']
     }))
       .then(response => {
         const products = formatSurvey(response.data.data.surveyProducts)
@@ -47,8 +47,11 @@ export const getProducts = (typeAndGender) => {
 }
 
 //select product
-export const selectProduct = () => {
-  
+export const toggleSelection = (id) => {
+  //get all products from store
+  //find the one with matching id
+  // switch the value of selected 
+  //return new products obj
 }
 
 //clear survey

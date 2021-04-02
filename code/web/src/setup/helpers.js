@@ -58,7 +58,7 @@ export function slug(text) {
 export function formatSurvey(products) {
   const surveyProducts = products.reduce((acc, listObj, i) => {
     acc[i + 1] = listObj.products.map(product => {
-      product.select = false
+      product.selected = false
       return product
     })
     return acc
