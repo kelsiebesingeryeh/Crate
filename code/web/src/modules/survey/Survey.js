@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
 import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection } from './api/actions'
 import { create } from '../subscription/api/actions';
-import userRoutes from '../../setup/routes/user'
+import userRoutes from '../../setup/routes/user';
+import { styleToString } from '../../setup/helpers'
 
 // UI Imports
 import SurveyModal from '../../ui/surveyModal/SurveyModal'
@@ -45,23 +46,24 @@ class Survey extends PureComponent {
         genDesc = (selected) => {
           const sorted = Object.keys(selected).sort((a, b) => selected[b] - selected[a])
           if (sorted.length > 1) {
-            return `${sorted[0]} and ${sorted[1]}`
+            return `${styleToString(sorted[0])} and ${styleToString(sorted[1])}`
           } else {
-            return sorted[0]
+            return styleToString(sorted[0])
           }
         }
 
         getResults = () => {
-          const results = Object.values(this.props.survey).flat()
+          const results = Object.values(this.props.survey.products).flat()
           const selected = results.reduce((acc, prod) =>
             {
-              if(prod.selected && prod.styletag in acc) {
-                acc[prod.styletag]++
+              if(prod.selected && prod.styleTag in acc) {
+                acc[prod.styleTag]++
               } else if(prod.selected) {
-                acc[prod.styletag] = 1
+                acc[prod.styleTag] = 1
               }
               return acc
             }, {})
+            console.log(selected)
 
           return this.genDesc(selected)
         }
@@ -93,7 +95,8 @@ class Survey extends PureComponent {
                   items={products[page]}
                   toggleSelection={this.toggleSelection}
                 />
-              : <SurveyModal title="Results Page"
+              : <SurveyModal
+                  title="Results Page"
                   details="Here are your results!"
                   completeSubscription={this.completeSubscription}
                   results={this.getResults()}

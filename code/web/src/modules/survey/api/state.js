@@ -7,7 +7,7 @@ import {
   SURVEY_CLEAR,
   SURVEY_NEXT_PAGE,
   SURVEY_PREVIOUS_PAGE,
-  TOGGLE_SELECTION
+  SURVEY_TOGGLE_SELECTION
 } from './actions'
 
 // Initial State
@@ -45,7 +45,7 @@ export const surveyReducer = (state = surveyInitialState, action) => {
         page: action.page,
       }
 
-    case TOGGLE_SELECTION:
+    case SURVEY_TOGGLE_SELECTION:
       return {
         ...state,
         products: action.products

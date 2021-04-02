@@ -66,3 +66,14 @@ export function formatSurvey(products) {
 
   return surveyProducts
 }
+
+//convert style to string
+export function styleToString(style) {
+  const key = {
+    1: 'Casual',
+    2: 'Edgy',
+    3: 'Classy'
+  }
+
+  return key[style]
+}

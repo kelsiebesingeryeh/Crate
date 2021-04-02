@@ -12,7 +12,7 @@ export const SURVEY_GET_PRODUCTS_FAIL = 'SURVEY_GET_PRODUCTS_FAIL'
 export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 export const SURVEY_CLEAR = 'SURVEY_CLEAR'
-export const TOGGLE_SELECTION = 'TOGGLE_SELECTION'
+export const SURVEY_TOGGLE_SELECTION = 'SURVEY_TOGGLE_SELECTION'
 
 // Actions
 
@@ -64,7 +64,7 @@ export const toggleSelection = (id, storedProducts) => {
 
   return dispatch => {
     dispatch({
-      type: 'TOGGLE_SELECTION',
+      type: 'SURVEY_TOGGLE_SELECTION',
       products: products,
     })
   }

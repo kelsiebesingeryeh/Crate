@@ -1,7 +1,7 @@
 import Survey from './Survey'
 import { getProducts, nextPage } from './api/actions'
 import { surveyReducer } from './api/state'
-import {}
+import { getResults, genDesc } from './Survey'
 
 describe('Survey', () => {
   it('should exist', () => {
@@ -47,11 +47,6 @@ describe('state', () => {
   });
 });
 
-describe('Results', () => {
-  it('should be able to interpret survey results', () => {
-    
-  })
-})
 
 // describe('actions', () => {
 //   it('should increase the page by 1', () => {
