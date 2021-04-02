@@ -53,3 +53,27 @@ export function slug(text) {
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '')            // Trim - from end of text
 }
+
+//Format surveyModal
+export function formatSurvey(products) {
+  const surveyProducts = products.reduce((acc, listObj, i) => {
+    acc[i + 1] = listObj.products.map(product => {
+      product.selected = false
+      return product
+    })
+    return acc
+  }, {})
+
+  return surveyProducts
+}
+
+//convert style to string
+export function styleToString(style) {
+  const key = {
+    1: 'Casual',
+    2: 'Edgy',
+    3: 'Classy'
+  }
+
+  return key[style]
+}

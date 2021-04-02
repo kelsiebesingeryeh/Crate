@@ -94,7 +94,7 @@ module.exports = {
         slug: 'edgy-shirt-for-women-two',
         description: 'A very edgy t-shirt for Women.',
         type: params.product.types.cloth.id,
-        gender: params.user.gender.male.id,
+        gender: params.user.gender.female.id,
         category: params.product.category.shirt.id,
         styleTag: params.product.styleTag.edgy.id,
         image: '/images/stock/edgy-shirt-f-2.jpg',

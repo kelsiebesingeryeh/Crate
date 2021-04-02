@@ -28,7 +28,7 @@ describe('state', () => {
 
     expect(results).toEqual({"isLoading": false, "page": 2, "products": {}});
   })
-  
+
   it('should update the state to include products', () => {
     let actionObj = {
       type: 'SURVEY_GET_PRODUCTS',
@@ -45,6 +45,7 @@ describe('state', () => {
     expect(newResults.products).toEqual({"1": "edgy shirt"});
   });
 });
+
 
 // describe('actions', () => {
 //   it('should increase the page by 1', () => {

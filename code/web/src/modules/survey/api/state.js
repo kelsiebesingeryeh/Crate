@@ -4,14 +4,16 @@
 import {
   SURVEY_GET_PRODUCTS,
   SURVEY_GET_PRODUCTS_FAIL,
+  SURVEY_CLEAR,
   SURVEY_NEXT_PAGE,
-  SURVEY_PREVIOUS_PAGE
+  SURVEY_PREVIOUS_PAGE,
+  SURVEY_TOGGLE_SELECTION
 } from './actions'
 
 // Initial State
 const surveyInitialState = {
   isLoading: false,
-  page: 0,
+  page: 1,
   products: {}
 }
 
@@ -24,6 +26,13 @@ export const surveyReducer = (state = surveyInitialState, action) => {
         products: action.products
       }
 
+    case SURVEY_CLEAR:
+      return {
+        ...state,
+        products: action.products,
+        page: action.page
+      }
+
     case SURVEY_NEXT_PAGE:
       return {
         ...state,
@@ -34,6 +43,12 @@ export const surveyReducer = (state = surveyInitialState, action) => {
       return {
         ...state,
         page: action.page,
+      }
+
+    case SURVEY_TOGGLE_SELECTION:
+      return {
+        ...state,
+        products: action.products
       }
 
     default:

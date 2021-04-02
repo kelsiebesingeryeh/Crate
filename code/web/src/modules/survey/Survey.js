@@ -3,9 +3,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection } from './api/actions'
 import { create } from '../subscription/api/actions';
-import userRoutes from '../../setup/routes/user'
+import userRoutes from '../../setup/routes/user';
+import { styleToString } from '../../setup/helpers'
+
 
 // UI Imports
 import SurveyModal from '../../ui/surveyModal/SurveyModal'
@@ -18,13 +20,8 @@ class Survey extends PureComponent {
         super(props)
         this.state = {
            isLoading: false,
-           products: {
-            1: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-            2: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-            3: [{styleTag: 1,image: `${APP_URL}/images/crate.png`}, {styleTag: 2, image: `${APP_URL}/images/crate.png`, }, { styleTag: 3, image: `${APP_URL}/images/crate.png`, }, { styleTag: 4, image: `${APP_URL}/images/crate.png`, }, { styleTag: 5, image: `${APP_URL}/images/crate.png`, }, { styleTag: 6, image: `${APP_URL}/images/crate.png`, }],
-          },
-          }
         }
+      }
 
         // tell survey which product images to render
         // track which products are selected
@@ -32,7 +29,7 @@ class Survey extends PureComponent {
         // button: text changes when on last page
         // when survey is submitted, results are displayed
         // on results page, retake quiz or complete subscription
-        
+
         handleNext = () => {
           this.setState({
             isLoading: true
@@ -47,31 +44,64 @@ class Survey extends PureComponent {
           this.props.previousPage(this.props.survey.page)
         }
 
+        genDesc = (selected) => {
+          const sorted = Object.keys(selected).sort((a, b) => selected[b] - selected[a])
+          if (sorted.length > 1) {
+            return `${styleToString(sorted[0])} and ${styleToString(sorted[1])}`
+          } else {
+            return styleToString(sorted[0])
+          }
+        }
+
+        getResults = () => {
+          const results = Object.values(this.props.survey.products).flat()
+          const selected = results.reduce((acc, prod) =>
+            {
+              if(prod.selected && prod.styleTag in acc) {
+                acc[prod.styleTag]++
+              } else if(prod.selected) {
+                acc[prod.styleTag] = 1
+              }
+              return acc
+            }, {})
+
+          return this.genDesc(selected)
+        }
+
+        toggleSelection = (id) => {
+          this.props.toggleSelection(id, this.props.survey.products)
+        }
+
         completeSubscription = () => {
-          console.log('this is not done')
-          // post subscription with results, userID, crateID
-          // reset survey store to initial state
-          // this.props.create()
+          //send getResults() to server
+          //if 200 code re-route
+          //if not handle error? or we can figure that out tomorrow
+          
+          this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
         }
-        
+
         render() {
           const { page, products } = this.props.survey
           return (
             <>
-            {products[page] ?
-              <SurveyModal title="Style Survey" 
-                details="Choose the images that fits your style"
-                nextPage={this.handleNext} 
-                prevPage={this.handlePrev} 
-                page={page}
-                pageCount={products.length}
-                items={products[page].products}/>
-            : <SurveyModal title="Results Page" 
-                details="Here are your results!"
-                completeSubscription={this.completeSubscription}
-                results={"Edgy and Classy"}/>
-            }
+              {Array.isArray(products[page]) ?
+                <SurveyModal title="Style Survey"
+                  details="Choose the images that fits your style"
+                  nextPage={this.handleNext}
+                  prevPage={this.handlePrev}
+                  page={page}
+                  pageCount={Object.keys(products).length + 1}
+                  items={products[page]}
+                  toggleSelection={this.toggleSelection}
+                />
+              : <SurveyModal
+                  title="Results Page"
+                  details="Here are your results!"
+                  completeSubscription={this.completeSubscription}
+                  results={this.getResults()}
+                />
+              }
            </>
           )
         }
@@ -84,8 +114,8 @@ class Survey extends PureComponent {
       survey: state.survey
     }
   }
-  
-  export default connect(surveyState, { nextPage, previousPage, getProducts })(withRouter(Survey))
-  
+
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection })(withRouter(Survey))
+
   // grouped by category (watches, belts, top, bottoms, etc...)
-  // what needs to get passed in as items - 
+  // what needs to get passed in as items -
