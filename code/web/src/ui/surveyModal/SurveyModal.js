@@ -45,7 +45,7 @@ const SurveyModal = (props) => {
                         key={item.id}
                         id={item.id}
                         styleTag={item.styleTag}
-                        onClick={()=>{console.log(item.styleTag)}}
+                        onClick={() => props.toggleSelection(item.id)}
                         style={{
                           margin: "1%",
                           width: "30%",

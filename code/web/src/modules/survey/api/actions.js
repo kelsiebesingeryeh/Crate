@@ -52,8 +52,8 @@ export const toggleSelection = (id, storedProducts) => {
 
   const products = storedProducts
 
-  for (page in products) {
-    products[page] = products.map(product => {
+  for (const page in products) {
+    products[page] = products[page].map(product => {
       if (product.id === id) {
         product.selected = !product.selected
       }

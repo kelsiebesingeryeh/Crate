@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage, clearSurvey } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection } from './api/actions'
 import { create } from '../subscription/api/actions';
 import userRoutes from '../../setup/routes/user'
 
@@ -66,6 +66,10 @@ class Survey extends PureComponent {
           return this.genDesc(selected)
         }
 
+        toggleSelection = (id) => {
+          this.props.toggleSelection(id, this.props.survey.products)
+        }
+
         completeSubscription = () => {
           console.log('this is not done')
           // post subscription with results, userID, crateID
@@ -86,7 +90,9 @@ class Survey extends PureComponent {
                   prevPage={this.handlePrev}
                   page={page}
                   pageCount={Object.keys(products).length + 1}
-                  items={products[page]}/>
+                  items={products[page]}
+                  toggleSelection={this.toggleSelection}
+                />
               : <SurveyModal title="Results Page"
                   details="Here are your results!"
                   completeSubscription={this.completeSubscription}
@@ -106,7 +112,7 @@ class Survey extends PureComponent {
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection })(withRouter(Survey))
 
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items -
