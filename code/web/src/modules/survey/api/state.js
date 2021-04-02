@@ -44,6 +44,12 @@ export const surveyReducer = (state = surveyInitialState, action) => {
         page: action.page,
       }
 
+    case TOGGLE_SELECTION:
+      return {
+        ...state,
+        products: action.products
+      }
+
     default:
       return state
   }

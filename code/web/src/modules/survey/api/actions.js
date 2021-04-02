@@ -12,6 +12,7 @@ export const SURVEY_GET_PRODUCTS_FAIL = 'SURVEY_GET_PRODUCTS_FAIL'
 export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 export const SURVEY_CLEAR = 'SURVEY_CLEAR'
+export const TOGGLE_SELECTION = 'TOGGLE_SELECTION'
 
 // Actions
 
@@ -47,11 +48,26 @@ export const getProducts = (typeAndGender) => {
 }
 
 //select product
-export const toggleSelection = (id) => {
-  //get all products from store
-  //find the one with matching id
-  // switch the value of selected 
-  //return new products obj
+export const toggleSelection = (id, storedProducts) => {
+
+  const products = storedProducts
+
+  for (page in products) {
+    products[page] = products.map(product => {
+      if (product.id === id) {
+        product.selected = !product.selected
+      }
+
+      return product
+    })
+  }
+
+  return dispatch => {
+    dispatch({
+      type: 'TOGGLE_SELECTION',
+      products: products,
+    })
+  }
 }
 
 //clear survey
