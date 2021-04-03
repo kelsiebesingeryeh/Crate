@@ -20,6 +20,7 @@ class Survey extends PureComponent {
         super(props)
         this.state = {
            isLoading: false,
+           selectCount: 0
         }
       }
 
@@ -32,7 +33,8 @@ class Survey extends PureComponent {
 
         handleNext = () => {
           this.setState({
-            isLoading: true
+            isLoading: true,
+            selectCount: 0
           })
           this.props.nextPage(this.props.survey.page)
         }
@@ -70,6 +72,9 @@ class Survey extends PureComponent {
 
         toggleSelection = (id) => {
           this.props.toggleSelection(id, this.props.survey.products)
+          this.setState(prevState=> ({
+            selectCount: prevState.selectCount + 1
+          }))
         }
 
         completeSubscription = () => {
@@ -93,6 +98,7 @@ class Survey extends PureComponent {
                   page={page}
                   pageCount={Object.keys(products).length + 1}
                   items={products[page]}
+                  selectCount={this.state.selectCount}
                   toggleSelection={this.toggleSelection}
                 />
               : <SurveyModal
