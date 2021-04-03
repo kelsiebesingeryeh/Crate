@@ -85,7 +85,7 @@ const SurveyModal = (props) => {
                     <Button 
                       theme="secondary" 
                       type="button" 
-                      disabled={props.selectCount>1?false:true}
+                      disabled={props.selectCount>0?false:true}
                       onClick={props.nextPage}>
                       Next →
                     </Button>
