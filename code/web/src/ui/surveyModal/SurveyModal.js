@@ -73,7 +73,7 @@ const SurveyModal = (props) => {
                 </Grid>
                 <Grid>
                   {props.pageCount > props.page ?
-                  <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+                  <GridCell style={{ padding: '1em', textAlign: 'center' }}>
                     <Button 
                       theme="primary" 
                       type="button" 
