@@ -95,10 +95,14 @@ class Survey extends PureComponent {
         }
 
         completeSubscription = () => {
+
+          create({
+            style: getResults()
+          })
           //send getResults() to server
           //if 200 code re-route
           //if not handle error? or we can figure that out tomorrow
-          
+
           this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
         }
