@@ -1,48 +1,20 @@
 import request from 'supertest';
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import schema from '../../../setup/schema';
-import authentication from '../../../setup/authentication'
-import database from '../../../setup/database'
-import { isType } from 'graphql';
+import { server, init, userLogin} from '../../../../test/testHelper';
 
 
 describe('product queries', () => {
-  let server = express();
-
-  beforeAll(() => {
-    server.use(authentication)
-    server.use(
-      "/",
-      graphqlHTTP(request => ({
-        schema:schema,
-        graphql: false,
-        context: {
-          auth: {
-            user: request.user,
-            isAuthenticated: request.user && request.user.id > 0
-              }
-            }
-        }))
-      )
-    }
-  )
-
+  init()
+  
   it('returns list of products', async () => {
+    let userToken = await userLogin()
+
+
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(type: 1, gender: 1){ category products{ category styleTag image } } }`
+        query: `{ surveyProducts(type: 1, gender: 1){ products{ category styleTag image } } }`
             })
 
     expect(response.statusCode).toBe(200);
@@ -52,7 +24,6 @@ describe('product queries', () => {
     expect(response.body.data.surveyProducts).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          category: 1,
           products: expect.arrayContaining([
             expect.objectContaining({
               category: 1,
@@ -66,20 +37,14 @@ describe('product queries', () => {
   });
 
   it('can query a different type and gender', async () => {
+    let userToken = await userLogin()
+
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(type: 2, gender: 2){ category products{ category styleTag image } } }`
+        query: `{ surveyProducts(type: 2, gender: 2){ products{ category styleTag image } } }`
             })
 
     expect(response.statusCode).toBe(200);
@@ -89,7 +54,6 @@ describe('product queries', () => {
     expect(response.body.data.surveyProducts).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          category: 6,
           products: expect.arrayContaining([
             expect.objectContaining({
               category: 6,
@@ -103,20 +67,14 @@ describe('product queries', () => {
   });
 
   it('can query without a type', async () => {
+    let userToken = await userLogin()
+    
     let response = await request(server)
-      .post("/")
-      .send({
-        query: `{ userLogin(email: "user@crate.com", password: "123456") { token } }`
-      })
-
-    let userToken = response.body.data.userLogin.token
-
-    response = await request(server)
       .post("/")
       .set("Authorization", `Bearer ${userToken}`)
       .set('Accept', 'application/json')
       .send({
-        query: `{ surveyProducts(gender: 2){ category products{ category styleTag image type } } }`
+        query: `{ surveyProducts(gender: 2){ products{ category styleTag image type } } }`
             })
 
     expect(response.statusCode).toBe(200);
@@ -142,18 +100,5 @@ describe('product queries', () => {
       ])
     )
   });
-
-  afterAll(async done => {
-    database.close();
-    done();
-  });
 })
 
-
-// data: {
-//   products: {
-//     shirt: [{}],
-//     bottoms: [{}],
-//     jacket: [{}]
-//   }
-// }

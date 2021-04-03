@@ -13,22 +13,22 @@ export async function getSurveyProducts(parentValue, { type, gender }, { auth })
       }
     });
     const groups = products.reduce((groups, product) => {
-      let category = product.category;
-      groups[category] = [...groups[category] || [], product];
-      return groups;
+      const cat = product.category
+      if (!(cat in groups)) {
+        groups[cat] = { "products": [] }
+      }
+
+      groups[cat].products = [...groups[cat].products, product]
+      return groups
     }, {});
-    const formatted_groups = Object.entries(groups).reduce((fmt, group) => {
-      fmt.push({
-        "category": group[0],
-        "products": group[1]
-      })
-      return fmt
-    }, []);
-    return formatted_groups
+
+    return Object.values(groups)
   } else {
     throw new Error('Please login to subscribe to this crate.')
   }
 }
+
+
 
 // Get all products
 export async function getAll() {
