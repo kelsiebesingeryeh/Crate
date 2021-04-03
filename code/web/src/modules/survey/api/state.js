@@ -15,6 +15,7 @@ import {
 const surveyInitialState = {
   isLoading: false,
   page: 1,
+  crateId: 0,
   products: {}
 }
 
@@ -24,7 +25,8 @@ export const surveyReducer = (state = surveyInitialState, action) => {
     case SURVEY_GET_PRODUCTS:
       return {
         ...state,
-        products: action.products
+        products: action.products,
+        crateId: action.crateId
       }
 
     case SURVEY_CLEAR:

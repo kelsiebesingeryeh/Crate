@@ -30,7 +30,7 @@ class Item extends PureComponent {
     }
   }
 
-  onClickSubscribe = (type, gender) => {
+  onClickSubscribe = (type, gender, id) => {
     this.setState({
       isLoading: true
     })
@@ -39,7 +39,7 @@ class Item extends PureComponent {
 
     const postObject = type === null ? { gender } : { type, gender }
 
-    this.props.getProducts(postObject)
+    this.props.getProducts(postObject, id)
       .then(response => {
         // if (response.data.errors && response.data.errors.length > 0) {
         //   this.props.messageShow(response.data.errors[0].message)
@@ -65,7 +65,7 @@ class Item extends PureComponent {
   render() {
     const { id, name, description, type, gender } = this.props.crate
     const { isLoading } = this.state
-
+  
     return (
       <Card style={{ width: '18em', backgroundColor: white }}>
         <p style={{ padding: '2em 3em 0 3em' }}>
@@ -80,7 +80,7 @@ class Item extends PureComponent {
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
             <Button
               theme="primary"
-              onClick={this.onClickSubscribe.bind(this, type, gender)}
+              onClick={this.onClickSubscribe.bind(this, type, gender, id)}
               type="button"
               disabled={ isLoading }
             >
