@@ -127,7 +127,7 @@ export function create(variables) {
       operation: 'subscriptionCreate',
       variables,
       fields: ['id']
-    })).then(response => console.log(response))
+    }))
   }
 }
 
