@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection, retakeSurvey } from './api/actions'
 import { create } from '../subscription/api/actions';
 import crateRoutes from '../../setup/routes/crate'
 import userRoutes from '../../setup/routes/user';
@@ -46,6 +46,7 @@ class Survey extends PureComponent {
             selectCount: 1
           })
           this.props.previousPage(this.props.survey.page)
+          console.log("Is this connected?")
         }
 
         genDesc = (selected) => {
@@ -85,6 +86,15 @@ class Survey extends PureComponent {
           this.props.history.push(crateRoutes.list.path)
         }
 
+        retakeSurvey = () => {
+          console.log("THIS WORKS")
+          this.setState({
+            selectCount: 1
+          })
+          this.props.retakeSurvey()
+          this.props.history.push(crateRoutes.survey.path)
+        }
+
         completeSubscription = () => {
           //send getResults() to server
           //if 200 code re-route
@@ -114,6 +124,8 @@ class Survey extends PureComponent {
                   title="Results Page"
                   details="Here are your results!"
                   completeSubscription={this.completeSubscription}
+                  retakeSurvey={this.retakeSurvey}
+                  exitSurvey={this.exitSurvey}
                   results={this.getResults()}
                 />
               }
@@ -130,7 +142,7 @@ class Survey extends PureComponent {
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey })(withRouter(Survey))
 
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items -

@@ -93,7 +93,7 @@ const SurveyModal = (props) => {
                     <Button 
                       theme="primary" 
                       type="button" 
-                      onClick={props.prevPage}>
+                      onClick={props.retakeSurvey}>
                       Retake Quiz
                     </Button>
                     <Button 

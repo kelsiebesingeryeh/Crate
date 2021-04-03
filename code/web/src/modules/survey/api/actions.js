@@ -13,6 +13,7 @@ export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 export const SURVEY_CLEAR = 'SURVEY_CLEAR'
 export const SURVEY_TOGGLE_SELECTION = 'SURVEY_TOGGLE_SELECTION'
+export const RETAKE_SURVEY = 'RETAKE_SURVEY'
 
 // Actions
 
@@ -76,6 +77,16 @@ export const clearSurvey = () => {
     dispatch({
       type: 'SURVEY_CLEAR',
       products: {},
+      page: 1
+    })
+  }
+}
+
+//retake survey
+export const retakeSurvey = () => {
+  return dispatch => {
+    dispatch({
+      type: 'RETAKE_SURVEY',
       page: 1
     })
   }
