@@ -18,7 +18,7 @@ export const RETAKE_SURVEY = 'RETAKE_SURVEY'
 // Actions
 
 // Get list of products
-export const getProducts = (typeAndGender) => {
+export const getProducts = (typeAndGender, id) => {
   return dispatch => {
     return axios.post(routeApi, query({
       operation: 'surveyProducts',
@@ -31,6 +31,7 @@ export const getProducts = (typeAndGender) => {
           return dispatch({
             type: SURVEY_GET_PRODUCTS,
             isLoading: false,
+            crateId: id,
             products: products
           })
         } else {
@@ -77,7 +78,8 @@ export const clearSurvey = () => {
     dispatch({
       type: 'SURVEY_CLEAR',
       products: {},
-      page: 1
+      page: 1,
+      crateId: 0
     })
   }
 }

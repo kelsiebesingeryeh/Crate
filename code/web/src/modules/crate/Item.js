@@ -30,7 +30,7 @@ class Item extends PureComponent {
     }
   }
 
-  onClickSubscribe = (type, gender) => {
+  onClickSubscribe = (type, gender, id) => {
     this.setState({
       isLoading: true
     })
@@ -39,17 +39,17 @@ class Item extends PureComponent {
 
     const postObject = type === null ? { gender } : { type, gender }
 
-    this.props.getProducts(postObject)
+    this.props.getProducts(postObject, id)
       .then(response => {
-        // if (response.data.errors && response.data.errors.length > 0) {
-        //   this.props.messageShow(response.data.errors[0].message)
-        // } else {
+        if (response.data && response.data.errors.length > 0) {
+          this.props.messageShow(response.data.errors[0].message)
+        } else {
           this.props.history.push(crateRoute.survey.path)
-        // }
+        }
       })
       .catch(error => {
         console.log(error)
-        this.props.messageShow('There was some error subscribing to this crate. Please try again.')
+        this.props.messageShow('There was some error loading your survey. Please try again.')
       })
       .then(() => {
         this.setState({
@@ -80,7 +80,7 @@ class Item extends PureComponent {
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
             <Button
               theme="primary"
-              onClick={this.onClickSubscribe.bind(this, type, gender)}
+              onClick={this.onClickSubscribe.bind(this, type, gender, id)}
               type="button"
               disabled={ isLoading }
             >

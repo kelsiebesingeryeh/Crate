@@ -3,11 +3,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection, retakeSurvey } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection, retakeSurvey } from './api/actions';
 import { create } from '../subscription/api/actions';
 import crateRoutes from '../../setup/routes/crate'
 import userRoutes from '../../setup/routes/user';
-import { styleToString } from '../../setup/helpers'
+import { styleToString } from '../../setup/helpers';
+import { messageShow, messageHide } from '../common/api/actions';
 
 
 // UI Imports
@@ -16,6 +17,7 @@ import SurveyModal from '../../ui/surveyModal/SurveyModal'
 //App Imports
 import { APP_URL } from "../../setup/config/env";
 
+//component
 class Survey extends PureComponent {
     constructor(props) {
         super(props)
@@ -24,13 +26,6 @@ class Survey extends PureComponent {
            selectCount: 0
         }
       }
-
-        // tell survey which product images to render
-        // track which products are selected
-        // how many can they choose?
-        // button: text changes when on last page
-        // when survey is submitted, results are displayed
-        // on results page, retake quiz or complete subscription
 
         handleNext = () => {
           this.setState({
@@ -95,10 +90,32 @@ class Survey extends PureComponent {
         }
 
         completeSubscription = () => {
-          //send getResults() to server
-          //if 200 code re-route
-          //if not handle error? or we can figure that out tomorrow
-          
+
+          this.props.create({
+            style: this.getResults(),
+            crateId: this.props.survey.crateId
+          }).then(response => {
+              if (response.data.errors && response.data.errors.length > 0) {
+                this.props.messageShow(response.data.errors[0].message)
+              } else {
+                this.props.messageShow('Subscribed successfully.')
+
+                this.props.history.push(userRoutes.subscriptions.path)
+              }
+            })
+            .catch(error => {
+              this.props.messageShow('There was some error subscribing to this crate. Please try again.')
+            })
+            .then(() => {
+              this.setState({
+                isLoading: false
+              })
+
+              window.setTimeout(() => {
+                this.props.messageHide()
+              }, 5000)
+            })
+
           this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
         }
@@ -131,17 +148,28 @@ class Survey extends PureComponent {
            </>
           )
         }
-        // product display
-    // this.props.history.push(userRoutes.subscriptions.path)
   }
+//component properties
+Survey.propTypes = {
+  nextPage: PropTypes.func.isRequired,
+  previousPage: PropTypes.func.isRequired,
+  getProducts: PropTypes.func.isRequired,
+  clearSurvey: PropTypes.func.isRequired,
+  toggleSelection: PropTypes.func.isRequired,
+  retakeSurvey: PropTypes.func.isRequired,
+  create: PropTypes.func.isRequired,
+  messageShow: PropTypes.func.isRequired,
+  messageHide: PropTypes.func.isRequired,
+  survey: PropTypes.object.isRequired
+}
 
+//component state
   function surveyState(state) {
     return {
       survey: state.survey
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey })(withRouter(Survey))
-
-  // grouped by category (watches, belts, top, bottoms, etc...)
-  // what needs to get passed in as items -
+  export default connect(surveyState, {
+    nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create, messageShow, messageHide
+  })(withRouter(Survey))

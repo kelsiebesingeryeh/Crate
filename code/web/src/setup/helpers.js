@@ -71,8 +71,8 @@ export function formatSurvey(products) {
 export function styleToString(style) {
   const key = {
     1: 'Casual',
-    2: 'Edgy',
-    3: 'Classy'
+    2: 'Classy',
+    3: 'Edgy'
   }
 
   return key[style]
