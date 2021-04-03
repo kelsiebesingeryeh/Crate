@@ -25,14 +25,7 @@ class Survey extends PureComponent {
            selectCount: 0
         }
       }
-
-        // tell survey which product images to render
-        // track which products are selected
-        // how many can they choose?
-        // button: text changes when on last page
-        // when survey is submitted, results are displayed
-        // on results page, retake quiz or complete subscription
-
+      
         handleNext = () => {
           this.setState({
             isLoading: true,

@@ -41,15 +41,16 @@ class Item extends PureComponent {
 
     this.props.getProducts(postObject, id)
       .then(response => {
-        // if (response.data.errors && response.data.errors.length > 0) {
-        //   this.props.messageShow(response.data.errors[0].message)
-        // } else {
+        console.log(response)
+        if (response.data && response.data.errors.length > 0) {
+          this.props.messageShow(response.data.errors[0].message)
+        } else {
           this.props.history.push(crateRoute.survey.path)
-        // }
+        }
       })
       .catch(error => {
         console.log(error)
-        this.props.messageShow('There was some error subscribing to this crate. Please try again.')
+        this.props.messageShow('There was some error loading your survey. Please try again.')
       })
       .then(() => {
         this.setState({
@@ -65,7 +66,7 @@ class Item extends PureComponent {
   render() {
     const { id, name, description, type, gender } = this.props.crate
     const { isLoading } = this.state
-  
+
     return (
       <Card style={{ width: '18em', backgroundColor: white }}>
         <p style={{ padding: '2em 3em 0 3em' }}>
