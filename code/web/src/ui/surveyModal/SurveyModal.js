@@ -8,6 +8,7 @@ import Card from "../../ui/card/Card";
 import { Grid, GridCell } from '../../ui/grid';
 import Button  from '../../ui/button/Button';
 
+
 //App Imports
 import { APP_URL } from "../../setup/config/env";
 
@@ -56,10 +57,12 @@ const SurveyModal = (props) => {
                           backgroundImage: `url(${item.image})`,
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover" }}>
-                            {/* <img
-                              src={item.image}
+                            <img
+                              src={`${ APP_URL }/images/selected-mark.png`}
                               alt={item.styleTag}
-                              style={{ width: '100%' }}/> */}
+                              style={{ 
+                                width: '100%',
+                                display: item.selected ? 'block' : 'none'  }}/>
                       </Card>
                     ))
                   :
