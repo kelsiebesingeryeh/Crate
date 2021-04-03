@@ -17,6 +17,7 @@ import SurveyModal from '../../ui/surveyModal/SurveyModal'
 //App Imports
 import { APP_URL } from "../../setup/config/env";
 
+//component
 class Survey extends PureComponent {
     constructor(props) {
         super(props)
@@ -25,7 +26,7 @@ class Survey extends PureComponent {
            selectCount: 0
         }
       }
-      
+
         handleNext = () => {
           this.setState({
             isLoading: true,
@@ -147,17 +148,28 @@ class Survey extends PureComponent {
            </>
           )
         }
-        // product display
-    // this.props.history.push(userRoutes.subscriptions.path)
   }
+//component properties
+Survey.propTypes = {
+  nextPage: PropTypes.func.isRequired,
+  previousPage: PropTypes.func.isRequired,
+  getProducts: PropTypes.func.isRequired,
+  clearSurvey: PropTypes.func.isRequired,
+  toggleSelection: PropTypes.func.isRequired,
+  retakeSurvey: PropTypes.func.isRequired,
+  create: PropTypes.func.isRequired,
+  messageShow: PropTypes.func.isRequired,
+  messageHide: PropTypes.func.isRequired,
+  survey: PropTypes.object.isRequired
+}
 
+//component state
   function surveyState(state) {
     return {
       survey: state.survey
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create, messageShow, messageHide })(withRouter(Survey))
-
-  // grouped by category (watches, belts, top, bottoms, etc...)
-  // what needs to get passed in as items -
+  export default connect(surveyState, {
+    nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create, messageShow, messageHide
+  })(withRouter(Survey))
