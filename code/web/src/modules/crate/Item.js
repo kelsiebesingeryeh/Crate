@@ -41,7 +41,6 @@ class Item extends PureComponent {
 
     this.props.getProducts(postObject, id)
       .then(response => {
-        console.log(response)
         if (response.data && response.data.errors.length > 0) {
           this.props.messageShow(response.data.errors[0].message)
         } else {
