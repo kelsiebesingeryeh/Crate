@@ -83,11 +83,20 @@ export const clearSurvey = () => {
 }
 
 //retake survey
-export const retakeSurvey = () => {
+export const retakeSurvey = (storedProducts) => {
+  const products = storedProducts
+
+  for (const page in products) {
+    products[page] = products[page].map(product => {
+      product.selected = false;
+      return product
+    })
+  }
   return dispatch => {
     dispatch({
       type: 'RETAKE_SURVEY',
-      page: 1
+      page: 1,
+      products: products,
     })
   }
 }

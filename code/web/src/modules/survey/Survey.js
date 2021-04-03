@@ -87,11 +87,10 @@ class Survey extends PureComponent {
         }
 
         retakeSurvey = () => {
-          console.log("THIS WORKS")
           this.setState({
-            selectCount: 1
+            selectCount: 0
           })
-          this.props.retakeSurvey()
+          this.props.retakeSurvey(this.props.survey.products)
           this.props.history.push(crateRoutes.survey.path)
         }
 
