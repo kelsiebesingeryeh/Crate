@@ -13,6 +13,7 @@ export const SURVEY_NEXT_PAGE = 'SURVEY_NEXT_PAGE'
 export const SURVEY_PREVIOUS_PAGE = 'SURVEY_PREVIOUS_PAGE'
 export const SURVEY_CLEAR = 'SURVEY_CLEAR'
 export const SURVEY_TOGGLE_SELECTION = 'SURVEY_TOGGLE_SELECTION'
+export const RETAKE_SURVEY = 'RETAKE_SURVEY'
 
 // Actions
 
@@ -77,6 +78,25 @@ export const clearSurvey = () => {
       type: 'SURVEY_CLEAR',
       products: {},
       page: 1
+    })
+  }
+}
+
+//retake survey
+export const retakeSurvey = (storedProducts) => {
+  const products = storedProducts
+
+  for (const page in products) {
+    products[page] = products[page].map(product => {
+      product.selected = false;
+      return product
+    })
+  }
+  return dispatch => {
+    dispatch({
+      type: 'RETAKE_SURVEY',
+      page: 1,
+      products: products,
     })
   }
 }

@@ -8,6 +8,7 @@ import Card from "../../ui/card/Card";
 import { Grid, GridCell } from '../../ui/grid';
 import Button  from '../../ui/button/Button';
 
+
 //App Imports
 import { APP_URL } from "../../setup/config/env";
 
@@ -36,7 +37,7 @@ const SurveyModal = (props) => {
                   <p style={{ marginTop: '1em', color: grey2 }}>{props.details}</p>
 
                   {props.page <= props.pageCount &&
-                  <p style={{ marginTop: '1em', color: grey2 }}>Page {props.page + 1}/{props.pageCount}</p>}
+                  <p style={{ marginTop: '1em', color: grey2 }}>Page {props.page}/{props.pageCount-1}</p>}
                 </GridCell>
               </Grid>
               <Grid justifyCenter alignCenter style={{maxHeight: "70%"}}>
@@ -51,15 +52,16 @@ const SurveyModal = (props) => {
                           width: "30%",
                           height: "12rem",
                           maxWidth: "12rem",
-                          // backgroundColor: "#FAA",
                           zIndex: 4,
                           backgroundImage: `url(${item.image})`,
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover" }}>
-                            {/* <img
-                              src={item.image}
+                            <img
+                              src={`${ APP_URL }/images/selected-mark.png`}
                               alt={item.styleTag}
-                              style={{ width: '100%' }}/> */}
+                              style={{ 
+                                width: '100%',
+                                display: item.selected ? 'block' : 'none'  }}/>
                       </Card>
                     ))
                   :
@@ -71,24 +73,46 @@ const SurveyModal = (props) => {
                 </Grid>
                 <Grid>
                   {props.pageCount > props.page ?
-                  <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-                    <Button theme="primary" type="button" onClick={props.prevPage}>
+                  <GridCell style={{ padding: '1em', textAlign: 'center' }}>
+                    <Button 
+                      theme="primary" 
+                      type="button" 
+                      disabled={props.page>1?false:true}
+                      onClick={props.prevPage}>
                       ← Back
                     </Button>
-                    <Button theme="secondary" type="button" onClick={props.nextPage}>
+                    <Button 
+                      theme="secondary" 
+                      type="button" 
+                      disabled={props.selectCount>0?false:true}
+                      onClick={props.nextPage}>
                       Next →
                     </Button>
                   </GridCell>
                   : <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-                    <Button theme="primary" type="button" onClick={props.prevPage}>
-                      Retake Quiz
+                    <Button 
+                      theme="primary" 
+                      type="button" 
+                      onClick={props.retakeSurvey}>
+                      Retake Survey
                     </Button>
-                    <Button theme="secondary" type="button" onClick={props.completeSubscription}>
+                    <Button 
+                      theme="secondary" 
+                      type="button" 
+                      onClick={props.completeSubscription}>
                       + Subscription
                     </Button>
                   </GridCell>
                 }
                 </Grid>
+                <GridCell style={{ padding: '0em', textAlign: 'center' }}>
+                  <Button 
+                    theme="none" 
+                    type="button" 
+                    onClick={props.exitSurvey}>
+                    exit
+                  </Button>
+                </GridCell>
             </div>
         </div>
     )
