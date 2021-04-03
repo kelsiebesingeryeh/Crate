@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
 import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection } from './api/actions'
 import { create } from '../subscription/api/actions';
+import crateRoutes from '../../setup/routes/crate'
 import userRoutes from '../../setup/routes/user';
 import { styleToString } from '../../setup/helpers'
 
@@ -77,6 +78,12 @@ class Survey extends PureComponent {
           }))
         }
 
+        exitSurvey = () => {
+          confirm('Are you sure you want to exit the survey? Progress will be lost.')
+          this.props.clearSurvey()
+          this.props.history.push(crateRoutes.list.path)
+        }
+
         completeSubscription = () => {
           //send getResults() to server
           //if 200 code re-route
@@ -95,6 +102,7 @@ class Survey extends PureComponent {
                   details="Choose the images that fits your style"
                   nextPage={this.handleNext}
                   prevPage={this.handlePrev}
+                  exitSurvey={this.exitSurvey}
                   page={page}
                   pageCount={Object.keys(products).length + 1}
                   items={products[page]}
