@@ -96,8 +96,9 @@ class Survey extends PureComponent {
 
         completeSubscription = () => {
 
-          create({
-            style: getResults()
+          this.props.create({
+            style: this.getResults(),
+            crateId: this.props.survey.crateId
           })
           //send getResults() to server
           //if 200 code re-route
@@ -145,7 +146,7 @@ class Survey extends PureComponent {
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create })(withRouter(Survey))
 
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items -
