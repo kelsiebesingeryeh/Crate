@@ -13,7 +13,8 @@
     "build:server:prod": "babel src -s -D -d build",
     "start:server:prod": " node build/index.js",
     "storybook": "start-storybook -p 9000 -c storybook",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "cypress": "./node_modules/.bin/cypress open"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
     "babel-loader": "8.1.0",
+    "cypress": "^6.8.0",
     "dotenv-webpack": "^1.7.0",
     "jest": "^26.6.3",
     "nodemon": "2.0.3",
