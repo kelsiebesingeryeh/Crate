@@ -104,15 +104,15 @@ const SurveyModal = (props) => {
                     </Button>
                   </GridCell>
                 }
-                <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+                </Grid>
+                <GridCell style={{ padding: '0em', textAlign: 'center' }}>
                   <Button 
-                    theme="secondary" 
+                    theme="none" 
                     type="button" 
                     onClick={props.exitSurvey}>
                     exit
                   </Button>
                 </GridCell>
-                </Grid>
             </div>
         </div>
     )

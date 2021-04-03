@@ -42,7 +42,8 @@ class Survey extends PureComponent {
 
         handlePrev = () => {
           this.setState({
-            isLoading: true
+            isLoading: true,
+            selectCount: 1
           })
           this.props.previousPage(this.props.survey.page)
         }
