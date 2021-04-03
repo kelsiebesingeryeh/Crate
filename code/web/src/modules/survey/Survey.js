@@ -3,11 +3,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom';
-import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection, retakeSurvey } from './api/actions'
+import { getProducts, nextPage, previousPage, clearSurvey, toggleSelection, retakeSurvey } from './api/actions';
 import { create } from '../subscription/api/actions';
 import crateRoutes from '../../setup/routes/crate'
 import userRoutes from '../../setup/routes/user';
-import { styleToString } from '../../setup/helpers'
+import { styleToString } from '../../setup/helpers';
+import { messageShow, messageHide } from '../common/api/actions';
 
 
 // UI Imports
@@ -99,10 +100,27 @@ class Survey extends PureComponent {
           this.props.create({
             style: this.getResults(),
             crateId: this.props.survey.crateId
-          })
-          //send getResults() to server
-          //if 200 code re-route
-          //if not handle error? or we can figure that out tomorrow
+          }).then(response => {
+              if (response.data.errors && response.data.errors.length > 0) {
+                this.props.messageShow(response.data.errors[0].message)
+              } else {
+                this.props.messageShow('Subscribed successfully.')
+
+                this.props.history.push(userRoutes.subscriptions.path)
+              }
+            })
+            .catch(error => {
+              this.props.messageShow('There was some error subscribing to this crate. Please try again.')
+            })
+            .then(() => {
+              this.setState({
+                isLoading: false
+              })
+
+              window.setTimeout(() => {
+                this.props.messageHide()
+              }, 5000)
+            })
 
           this.props.clearSurvey()
           this.props.history.push(userRoutes.subscriptions.path)
@@ -146,7 +164,7 @@ class Survey extends PureComponent {
     }
   }
 
-  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create })(withRouter(Survey))
+  export default connect(surveyState, { nextPage, previousPage, getProducts, clearSurvey, toggleSelection, retakeSurvey, create, messageShow, messageHide })(withRouter(Survey))
 
   // grouped by category (watches, belts, top, bottoms, etc...)
   // what needs to get passed in as items -
