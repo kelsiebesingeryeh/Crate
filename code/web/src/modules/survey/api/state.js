@@ -33,7 +33,8 @@ export const surveyReducer = (state = surveyInitialState, action) => {
       return {
         ...state,
         products: action.products,
-        page: action.page
+        page: action.page,
+        crateId: action.crateId
       }
 
     case SURVEY_NEXT_PAGE:
@@ -58,6 +59,7 @@ export const surveyReducer = (state = surveyInitialState, action) => {
       return {
         ...state,
         page: action.page,
+        products: action.products
       }
 
     default:

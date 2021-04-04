@@ -1,68 +1,116 @@
 import Survey from './Survey'
-import { getProducts, nextPage } from './api/actions'
 import { surveyReducer } from './api/state'
 
-describe('Survey', () => {
-  it('should exist', () => {
-    expect(true).toEqual(true);
-  });
-
-  it('should exist', () => {
-    expect(true).toEqual(true);
-  });
-});
-
-describe('state', () => {
+describe('Survey State', () => {
   it('should return state if no action is given', () => {
     const actual = surveyReducer([], {});
     expect(actual).toEqual([]);
   })
 
   it('should update the survey page', () => {
-    const actionObj = {
+    const actionObjNext = {
       type: 'SURVEY_NEXT_PAGE',
       page: 2
     }
 
-    const results = surveyReducer(undefined, actionObj)
+    const actionObjPrev = {
+      type: 'SURVEY_NEXT_PAGE',
+      page: 1
+    }
 
-    expect(results).toEqual({"isLoading": false, "page": 2, "products": {}});
+    const resultsNext = surveyReducer(undefined, actionObjNext)
+
+    expect(resultsNext).toEqual({"isLoading": false, "page": 2, "crateId": 0, "products": {}});
+
+    const resultsPrev = surveyReducer(undefined, actionObjPrev);
+
+    expect(resultsPrev).toEqual({"isLoading": false, "page": 1, "crateId": 0, "products": {}});
   })
 
   it('should update the state to include products', () => {
     let actionObj = {
       type: 'SURVEY_GET_PRODUCTS',
+      crateId: 1,
       products: {}
     };
     const results = surveyReducer(undefined, actionObj)
     expect(results.products).toEqual({});
+    expect(results.crateId).toEqual(1);
 
     actionObj = {
       type: 'SURVEY_GET_PRODUCTS',
+      crateId: 2,
       products:  {"1": "edgy shirt"}
     };
     const newResults = surveyReducer(results, actionObj)
     expect(newResults.products).toEqual({"1": "edgy shirt"});
+    expect(newResults.crateId).toEqual(2);
+  });
+
+  it('should clear its data', () => {
+    const actionObjPost = {
+      type: 'SURVEY_GET_PRODUCTS',
+      crateId: 2,
+      products:  {"1": "edgy shirt"}
+    };
+    const results = surveyReducer(undefined, actionObjPost)
+    expect(results.products).toEqual({"1": "edgy shirt"});
+    expect(results.crateId).toEqual(2);
+
+    const actionObjClear = {
+      type: 'SURVEY_CLEAR',
+      products: {},
+      page: 1,
+      crateId: 0
+    };
+    const newResults = surveyReducer(results, actionObjClear)
+    expect(newResults.products).toEqual({});
+    expect(newResults.crateId).toEqual(0);
+  });
+
+  it('should select items', () => {
+    const state = {
+      products: {
+        0: [{selected: false, id: 1}, {selected: false, id: 2}]
+      }
+    }
+
+    const actionObj = {
+      type: 'SURVEY_TOGGLE_SELECTION',
+      products:  {
+        '0': [{selected: false, id: 1}, {selected: true, id: 2}]
+      }
+    };
+    const results = surveyReducer(state, actionObj)
+    expect(results.products['0'][1].selected).toEqual(true);
+  });
+
+  it('should process a user retaking the survey', () => {
+    let actionObj = {
+      type: 'SURVEY_GET_PRODUCTS',
+      products: {
+        '0': [{selected: true, id: 1}, {selected: true, id: 2}]
+      },
+      crateId: 20
+    };
+    const results = surveyReducer(undefined, actionObj)
+    expect(results.products).toEqual({
+      '0': [{selected: true, id: 1}, {selected: true, id: 2}]
+    });
+    expect(results.crateId).toEqual(20)
+
+    const actionObjRetake = {
+      type: 'RETAKE_SURVEY',
+      products: {
+        '0': [{selected: false, id: 1}, {selected: false, id: 2}]
+      },
+      page: 1,
+    };
+
+    const newResults = surveyReducer(results, actionObjRetake)
+    expect(newResults.products).toEqual({
+      '0': [{selected: false, id: 1}, {selected: false, id: 2}]
+    });
+    expect(newResults.crateId).toEqual(20);
   });
 });
-
-
-// describe('actions', () => {
-//   it('should increase the page by 1', () => {
-//     const page = 1
-//     const results = nextPage(page)
-//     expect(results.page).toEqual(2);
-//   });
-// });
-
-//functional testing
-// do we test if the state has props? test each prop?
-
-// KB NOTES - integration testing
-// does the  survey exist?
-// is there a header
-// is there a survey header
-// image display, is it displaying the images
-// next button
-// when i click on an image, is there a check mark
-// when i click on the next button, the next page should

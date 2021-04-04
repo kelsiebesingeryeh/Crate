@@ -80,4 +80,14 @@ describe.only('Survey', () => {
       .get('.jsx-1368067487').should('exist')
     });
 
+    it.only("should route to the subscriptions page when the survey is submitted", () => {
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.get(".jsx-511674265").first().click()
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.get(".jsx-2258186958").click()
+      cy.wait(300)
+      cy.get(".jsx-715511798").should("exist")
+    });
+
 })
