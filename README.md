@@ -55,6 +55,8 @@ Click on image to view fullscreen and zoom
 
 ### **NEW!!!** Style Survey
 
+[IMAGE](https://media.giphy.com/media/iyFtKMjnhKZGN1CDxf/giphy.gif) · [GIF](https://media.giphy.com/media/W63iSBIqliJ1sn8rq7/giphy.gif)
+
 ![Screen Shot 2021-04-03 at 9 32 27 AM](https://user-images.githubusercontent.com/64617435/113524488-44e81880-956c-11eb-9a0f-380004aba309.png)
 ![Screen Shot 2021-04-03 at 9 32 49 AM](https://user-images.githubusercontent.com/64617435/113524494-4d405380-956c-11eb-9cd2-96a0f173378f.png)
 ![Screen Shot 2021-04-03 at 9 33 02 AM](https://user-images.githubusercontent.com/64617435/113524498-529d9e00-956c-11eb-86bb-0206d2e9dcb0.png)
