@@ -87,7 +87,7 @@ describe.only('Survey', () => {
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
       cy.get(".jsx-2258186958").click()
       cy.wait(300)
-      cy.get(".jsx-715511798").should('exist')
+      cy.get(".jsx-715511798").should("exist")
     });
 
 })
