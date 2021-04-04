@@ -74,20 +74,30 @@ describe.only('Survey', () => {
 
     it("should display the final results page", () => {
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
-      cy.get(".jsx-511674265").first().click()
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
-      .get('.jsx-1368067487').should('exist')
+      cy.get(".jsx-1368067487").should("contain", "Results Page");
     });
 
-    it.only("should route to the subscriptions page when the survey is submitted", () => {
-      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
-      cy.get(".jsx-511674265").first().click()
+    it("should route to the subscriptions page when the survey is submitted", () => {
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
       cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
-      cy.get(".jsx-2258186958").click()
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
       cy.wait(300)
-      cy.get(".jsx-715511798").should("exist")
+      cy.get('.jsx-2258186958').click()
+    });
+
+    it("should allow a user to retake the survey", () => {
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click()
+      cy.wait(300)
+      cy.get(".jsx-1228826222").click()
+    });
+
+    it("should allow a user to hit the back button", () => {
+      cy.get(".jsx-511674265").first().click().get(".jsx-2258186958").click();
+      cy.get(".jsx-1228826222").click();
     });
 
 })
